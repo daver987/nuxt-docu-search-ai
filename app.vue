@@ -79,56 +79,56 @@ defineShortcuts({
     </div>
     <UContainer class="h-full p-6">
       <div>
-        <!--        <UButton label="Open" @click="isOpen = true" />-->
+        <UButton label="Open" @click="isOpen = true" />
 
-        <!--        <UModal class="max-h-[500px]" v-model="isOpen">-->
-        <UCard
-          class="card-component mx-auto max-h-[650px] max-w-2xl"
-          :ui="{ divide: 'divide-y divide-gray-100 dark:divide-gray-800' }"
-        >
-          <template #header> Query the Nuxt Documentation... </template>
-          <div class="card-component max-h-[450px]">
-            <UCard
-              v-for="message in messages"
-              :key="message.id"
-              class="mb-2 whitespace-pre-wrap"
-            >
-              <Icon
-                :name="
-                  message.role === 'user'
-                    ? 'solar:user-linear'
-                    : 'solar:soundwave-square-line-duotone'
-                "
-              />
-              {{ message.role === 'user' ? 'User: ' : 'AI: ' }}
-              {{ message.content }}
-            </UCard>
-          </div>
-          <template #footer>
-            <form @submit="handleSubmit">
-              <UInput
-                @change="handleInputChange"
-                v-model="input"
-                name="chatQuestion"
-                placeholder="Search..."
-                icon="i-heroicons-magnifying-glass-20-solid"
-                :ui="{ icon: { trailing: { pointer: '' } } }"
+        <UModal class="max-h-[500px]" v-model="isOpen">
+          <UCard
+            class="card-component mx-auto max-h-[650px] w-full max-w-2xl"
+            :ui="{ divide: 'divide-y divide-gray-100 dark:divide-gray-800' }"
+          >
+            <template #header> Query the Nuxt Documentation... </template>
+            <div class="card-component max-h-[450px] w-full">
+              <UCard
+                v-for="message in messages"
+                :key="message.id"
+                class="mb-2 whitespace-pre-wrap"
               >
-                <template #trailing>
-                  <UButton
-                    v-show="q !== ''"
-                    color="gray"
-                    variant="link"
-                    icon="i-heroicons-x-mark-20-solid"
-                    :padded="false"
-                    @click="q = ''"
-                  />
-                </template>
-              </UInput>
-            </form>
-          </template>
-        </UCard>
-        <!--        </UModal>-->
+                <Icon
+                  :name="
+                    message.role === 'user'
+                      ? 'solar:user-linear'
+                      : 'solar:soundwave-square-line-duotone'
+                  "
+                />
+                {{ message.role === 'user' ? 'User: ' : 'AI: ' }}
+                {{ message.content }}
+              </UCard>
+            </div>
+            <template #footer>
+              <form @submit="handleSubmit">
+                <UInput
+                  @change="handleInputChange"
+                  v-model="input"
+                  name="chatQuestion"
+                  placeholder="Search..."
+                  icon="i-heroicons-magnifying-glass-20-solid"
+                  :ui="{ icon: { trailing: { pointer: '' } } }"
+                >
+                  <template #trailing>
+                    <UButton
+                      v-show="q !== ''"
+                      color="gray"
+                      variant="link"
+                      icon="i-heroicons-x-mark-20-solid"
+                      :padded="false"
+                      @click="q = ''"
+                    />
+                  </template>
+                </UInput>
+              </form>
+            </template>
+          </UCard>
+        </UModal>
       </div>
     </UContainer>
   </div>
