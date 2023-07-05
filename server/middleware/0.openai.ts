@@ -1,5 +1,11 @@
 import { Configuration, OpenAIApi } from 'openai'
 
+declare module 'h3' {
+  interface H3EventContext {
+    openai: OpenAI
+  }
+}
+
 export default eventHandler((event) => {
   const configuration = new Configuration({
     apiKey: useRuntimeConfig().OPENAI_API_KEY,
@@ -10,12 +16,8 @@ export default eventHandler((event) => {
 
   let openai: OpenAI
 
-  declare module 'h3' {
-    interface H3EventContext {
-      openai: OpenAI
-    }
-  }
   openai = new OpenAIApi(configuration)
+
   if (!openai) {
     openai = new OpenAIApi(configuration)
   }
