@@ -32,7 +32,7 @@ export default defineEventHandler(async (event: any) => {
 
   const { stream, handlers } = LangChainStream()
 
-  const OPENAI_API_KEY = event.context.openai
+  const OPENAI_API_KEY = useRuntimeConfig().OPENAI_API_KEY
   if (!OPENAI_API_KEY) {
     throw new Error('OPENAI_API_KEY is not set in the environment')
   } else {
