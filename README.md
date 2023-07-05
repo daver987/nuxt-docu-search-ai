@@ -10,7 +10,6 @@ NuxtLabs UI, and uses Upstash for Redis.
 2. [Setup and Installation](#setup-and-installation)
 3. [Usage](#usage)
 4. [Contribution](#contribution)
-5. [Future Plans](#future-plans)
 
 ## Project Structure
 
@@ -66,10 +65,6 @@ If you would like to contribute to this project, please follow these guidelines:
 
 Please ensure to adhere to this project's code of conduct and ensure your contributions pass all tests before opening a
 pull request.
-
-## Future Plans
-
-(Discuss any future improvements or features you plan to implement.)
 
 ## License
 
