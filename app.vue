@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { useChat } from 'ai/vue'
+
+const { messages, input, handleInputChange, handleSubmit } = useChat()
 const colorMode = useColorMode()
 const isDark = computed({
   get() {
@@ -28,7 +31,7 @@ defineShortcuts({
     >
       <div class="mx-auto flex w-full max-w-7xl justify-between">
         <div class="flex-1">
-          <a class="text-xl">Nuxt Docs AI</a>
+          <a class="text-xl">Nuxt DocuSearch AI</a>
         </div>
         <div class="flex flex-1 justify-end gap-x-4 self-stretch lg:gap-x-6">
           <div class="relative max-w-xs">
@@ -82,29 +85,46 @@ defineShortcuts({
           <UCard
             :ui="{ divide: 'divide-y divide-gray-100 dark:divide-gray-800' }"
           >
-            <template #header> Search the Nuxt Documentation... </template>
+            <template #header> Query the Nuxt Documentation... </template>
 
-            <!-- Content -->
+            <UCard
+              v-for="message in messages"
+              :key="message.id"
+              class="whitespace-pre-wrap"
+            >
+              <Icon
+                :name="
+                  message.role === 'user'
+                    ? 'solar:user-linear'
+                    : 'solar:soundwave-square-line-duotone'
+                "
+              />
+              {{ message.role === 'user' ? 'User: ' : 'AI: ' }}
+              {{ message.content }}
+            </UCard>
 
             <template #footer>
-              <UInput
-                v-model="q"
-                name="q"
-                placeholder="Search..."
-                icon="i-heroicons-magnifying-glass-20-solid"
-                :ui="{ icon: { trailing: { pointer: '' } } }"
-              >
-                <template #trailing>
-                  <UButton
-                    v-show="q !== ''"
-                    color="gray"
-                    variant="link"
-                    icon="i-heroicons-x-mark-20-solid"
-                    :padded="false"
-                    @click="q = ''"
-                  />
-                </template>
-              </UInput>
+              <form @submit="handleSubmit">
+                <UInput
+                  @change="handleInputChange"
+                  v-model="input"
+                  name="chatQuestion"
+                  placeholder="Search..."
+                  icon="i-heroicons-magnifying-glass-20-solid"
+                  :ui="{ icon: { trailing: { pointer: '' } } }"
+                >
+                  <template #trailing>
+                    <UButton
+                      v-show="q !== ''"
+                      color="gray"
+                      variant="link"
+                      icon="i-heroicons-x-mark-20-solid"
+                      :padded="false"
+                      @click="q = ''"
+                    />
+                  </template>
+                </UInput>
+              </form>
             </template>
           </UCard>
         </UModal>

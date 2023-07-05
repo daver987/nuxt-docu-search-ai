@@ -22,12 +22,14 @@
     "@vueuse/nuxt": "^10.2.1",
     "highlight.js": "^11.8.0",
     "nuxt": "^3.6.1",
+    "nuxt-icon": "^0.4.2",
     "prettier": "^2.8.8",
     "prettier-plugin-tailwindcss": "^0.3.0",
     "typescript": "latest"
   },
   "dependencies": {
     "@upstash/redis": "^1.21.0",
+    "ai": "^2.1.14",
     "langchain": "^0.0.96"
   }
 }
