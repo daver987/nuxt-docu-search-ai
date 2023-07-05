@@ -12,4 +12,7 @@ export default defineNuxtConfig({
     OPENAI_API_KEY: process.env.OPENAI_API_KEY,
     ACTIVELOOP_TOKEN: process.env.ACTIVELOOP_TOKEN,
   },
+  nitro: {
+    preset: 'vercel-edge',
+  },
 })
