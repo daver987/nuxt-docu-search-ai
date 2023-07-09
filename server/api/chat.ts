@@ -111,8 +111,7 @@ export default defineEventHandler(async (event: any) => {
     }
   )
 
-  let question = ''
-  question = messages[messages.length - 1].content
+  const question = messages[messages.length - 1].content
 
   chain
     .call(
