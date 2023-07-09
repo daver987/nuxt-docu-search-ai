@@ -2,18 +2,19 @@
 import { useChat } from 'ai/vue'
 
 const { messages, input, handleInputChange, handleSubmit } = useChat()
+
 const colorMode = useColorMode()
 const isDark = computed({
-  get() {
-    return colorMode.value === 'dark'
-  },
-  set() {
-    colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
-  },
+  get: () => colorMode.value === 'dark',
+  set: (value) => (colorMode.preference = value ? 'light' : 'dark'),
 })
+
+// Define state variables
 const isOpen = ref(false)
 const q = ref('')
 const navInput = ref('')
+
+// Define shortcut keys with defineShortcuts
 defineShortcuts({
   meta_k: {
     usingInput: true,
@@ -83,25 +84,31 @@ defineShortcuts({
 
         <UModal class="max-h-[500px]" v-model="isOpen">
           <UCard
-            class="card-component mx-auto max-h-[650px] w-full max-w-2xl"
+            class="card-component mx-auto max-h-[650px] w-full max-w-3xl px-1"
             :ui="{ divide: 'divide-y divide-gray-100 dark:divide-gray-800' }"
           >
-            <template #header> Query the Nuxt Documentation... </template>
+            <template #header> Query the Nuxt Documentation...</template>
             <div class="card-component max-h-[450px] w-full">
               <UCard
                 v-for="message in messages"
                 :key="message.id"
-                class="mb-2 whitespace-pre-wrap"
+                class="m-1 mb-2 whitespace-pre-wrap"
               >
-                <Icon
-                  :name="
-                    message.role === 'user'
-                      ? 'solar:user-linear'
-                      : 'solar:soundwave-square-line-duotone'
-                  "
-                />
-                {{ message.role === 'user' ? 'User: ' : 'AI: ' }}
-                {{ message.content }}
+                <span
+                  ><Icon
+                    class="mr-1.5"
+                    size="24px"
+                    :name="
+                      message.role === 'user'
+                        ? 'solar:user-linear'
+                        : 'solar:soundwave-square-line-duotone'
+                    "
+                  />
+                  <span class="ml-1">{{
+                    message.role === 'user' ? 'User: ' : 'AI: '
+                  }}</span>
+                  <span class="ml-1">{{ message.content }}</span></span
+                >
               </UCard>
             </div>
             <template #footer>
