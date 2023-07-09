@@ -1,5 +1,9 @@
 {
-  "name": "nuxt-app",
+  "name": "nuxt-docu-search-ai",
+  "version": "0.0.1",
+  "description": "A single-page application that combines the power of GPT-4 and Nuxt 3 documentation to assist developers in enhancing their coding skills.",
+  "repository": "https://github.com/daver987/nuxt-docu-search-ai",
+  "author": "David Robertson <info@drobertson.pro>",
   "private": true,
   "scripts": {
     "build": "nuxt build",
@@ -12,22 +16,18 @@
   },
   "devDependencies": {
     "@headlessui/tailwindcss": "^0.1.3",
-    "@highlightjs/vue-plugin": "^2.1.0",
     "@nuxt/devtools": "latest",
     "@nuxthq/ui": "npm:@nuxthq/ui-edge@latest",
-    "@tailwindcss/aspect-ratio": "^0.4.2",
-    "@tailwindcss/container-queries": "^0.1.1",
     "@tailwindcss/forms": "^0.5.3",
     "@tailwindcss/typography": "^0.5.9",
     "@types/node": "^20",
     "@vueuse/core": "^10.2.1",
     "@vueuse/nuxt": "^10.2.1",
     "chalk": "^5.3.0",
-    "highlight.js": "^11.8.0",
-    "langchain": "0.0.99",
+    "langchain": "0.0.105",
     "nuxt": "^3.6.2",
     "nuxt-icon": "^0.4.2",
-    "openai-edge": "^1.1.1",
+    "openai-edge": "^1.2.0",
     "peggy": "^3.0.2",
     "prettier": "^3.0.0",
     "prettier-plugin-tailwindcss": "^0.3.0",
@@ -36,8 +36,7 @@
   },
   "dependencies": {
     "@pinecone-database/pinecone": "^0.1.6",
-    "@upstash/redis": "^1.22.0",
-    "ai": "^2.1.15",
-    "dotenv": "^16.3.1"
-  }
+    "ai": "^2.1.17"
+  },
+  "license": "MIT"
 }
