@@ -1,5 +1,4 @@
 import { PineconeClient } from '@pinecone-database/pinecone'
-import chalk from 'chalk'
 import { ConversationalRetrievalQAChain } from 'langchain/chains'
 import { ChatOpenAI } from 'langchain/chat_models/openai'
 import { OpenAIEmbeddings } from 'langchain/embeddings/openai'
@@ -63,8 +62,6 @@ export default defineEventHandler(async (event: any) => {
   const body = await readBody(event)
   const { messages } = ChatSchema.parse(body)
 
-  console.log(chalk.blue('[MESSAGE]', JSON.stringify(messages)))
-
   if (!config.OPENAI_API_KEY) {
     throw new Error('OPENAI_API_KEY is not set in the environment')
   }
@@ -87,6 +84,7 @@ export default defineEventHandler(async (event: any) => {
     openAIApiKey: config.OPENAI_API_KEY,
     temperature: 0.5,
   })
+
   const questionModel = new ChatOpenAI({
     modelName: 'gpt-3.5-turbo',
     openAIApiKey: config.OPENAI_API_KEY,
