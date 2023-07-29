@@ -5,7 +5,7 @@ Nuxt 3. By leveraging the computational power of GPT-4 and the comprehensive Nux
 provides context-aware answers to user queries, effectively enhancing their coding skills and experience.
 
 The application is built using Nuxt 3 and LangChain, complemented by the aesthetic and functional capabilities of
-NuxtLabs UI. The tool utilizes the Vercel-AI package, which enables edge compatibility. 
+NuxtLabs UI. The tool utilizes the Vercel-AI package, which enables edge compatibility.
 To manage embeddings, the application integrates with the Pinecone Vector database, which is a powerful tool
 for handling and manipulating high-dimensional vector data.
 

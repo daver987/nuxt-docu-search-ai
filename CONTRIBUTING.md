@@ -11,9 +11,9 @@ managing and developing this open source project.
 This section guides you through submitting a bug report for Nuxt 3 DocuSearch AI. Following these guidelines helps
 maintainers understand your report, reproduce the behavior, and find related reports.
 
-* Use a clear and descriptive title for the issue to identify the problem.
-* Describe the exact steps which reproduce the problem in as many details as possible.
-* Provide specific examples to demonstrate the steps.
+- Use a clear and descriptive title for the issue to identify the problem.
+- Describe the exact steps which reproduce the problem in as many details as possible.
+- Provide specific examples to demonstrate the steps.
 
 ### Suggesting Enhancements
 
@@ -21,16 +21,16 @@ This section guides you through submitting an enhancement suggestion for Nuxt 3 
 features and minor improvements to existing functionality. Following these guidelines helps maintainers understand your
 suggestion and make a decision.
 
-* Use a clear and descriptive title for the issue to identify the suggestion.
-* Provide a step-by-step description of the suggested enhancement in as many details as possible.
-* Explain why this enhancement would be useful to most Nuxt 3 DocuSearch AI users.
+- Use a clear and descriptive title for the issue to identify the suggestion.
+- Provide a step-by-step description of the suggested enhancement in as many details as possible.
+- Explain why this enhancement would be useful to most Nuxt 3 DocuSearch AI users.
 
 ### Pull Requests
 
-* Fill in the required template.
-* Do not include issue numbers in the PR title.
-* Include screenshots and animated GIFs in your pull request whenever possible.
-* Ensure your changes do not break any existing functionality.
+- Fill in the required template.
+- Do not include issue numbers in the PR title.
+- Include screenshots and animated GIFs in your pull request whenever possible.
+- Ensure your changes do not break any existing functionality.
 
 ## Coding Standards
 
