@@ -20,15 +20,12 @@ marked.use(
   mangle()
 )
 
-// Component props
 const props = defineProps({
   markdown: String,
 })
 
-// Computed properties
 const compiledMarkdown = ref('')
 
-// Watchers
 watch(
   () => props.markdown,
   (newMarkdown) => {

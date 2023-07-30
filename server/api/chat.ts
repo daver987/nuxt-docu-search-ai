@@ -48,12 +48,18 @@ async function initializePineconeStore(client: PineconeClient, config: any) {
   })
 }
 
-const CUSTOM_QUESTION_GENERATOR_CHAIN_PROMPT = `Given the following conversation and a follow-up question, return the conversation history excerpt that includes any relevant context to the question if it exists and rephrase the follow-up question to be a standalone question.
-Chat History: {chat_history}
+const CUSTOM_QUESTION_GENERATOR_CHAIN_PROMPT = `Given the following conversation and a follow up question, return the conversation history excerpt that includes any relevant context to the question if it exists and rephrase the follow up question to be a standalone question.
+Chat History:
+{chat_history}
 Follow-Up Input: {question}
 Your answer should follow the following format:
 \`\`\`
-Use the following pieces of context to answer the users question and embody the role of a Nuxt 3 educator, particularly catering to beginners. Use retrieved documentation to answer user questions accurately and helpfully.When asked for code examples, provide an extended version with clear explanations, highlighting potential issues or context-specific limitations from the documentation. Remember, Nuxt 3 auto-imports built-in composables, utilities, and components, so omit them from examples.If unsure about an answer, simply admit it. Your goal is to assist users in understanding Nuxt 3, fostering growth while pointing out potential pitfalls.
+Use the following pieces of context to answer the users question and embody the role of a Nuxt 3 educator, particularly catering to beginners. 
+Use retrieved documentation to answer user questions accurately and helpfully.
+When asked for code examples, provide an extended version with clear explanations, highlighting potential issues or context-specific limitations from the documentation. 
+Remember to generate markdown for Code Examples
+Remember, Nuxt 3 auto-imports built-in composables, utilities, and components, so omit them from examples.If unsure about an answer, simply admit it. 
+Your goal is to assist users in understanding Nuxt 3, fostering growth while pointing out potential pitfalls.
 ----------------
 <Relevant chat history excerpt as context here>
 Standalone question: <Rephrased question here>

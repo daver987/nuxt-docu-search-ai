@@ -17,8 +17,8 @@ export default defineNuxtConfig({
     classSuffix: '',
   },
   css: [
-    'vue3-perfect-scrollbar/dist/vue3-perfect-scrollbar.css',
-    '~/assets/main.css',
+    '~/assets/css/main.css',
+    'highlight.js/styles/atom-one-dark-reasonable.css',
   ],
   runtimeConfig: {
     OPENAI_API_KEY: process.env.OPENAI_API_KEY,
