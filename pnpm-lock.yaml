@@ -31,9 +31,6 @@ devDependencies:
   '@types/node':
     specifier: ^18.17.1
     version: 18.17.1
-  '@vavt/md-editor-extension':
-    specifier: ^3.0.0
-    version: 3.0.0
   '@vueuse/core':
     specifier: ^10.2.1
     version: 10.2.1(vue@3.3.4)
@@ -2176,10 +2173,6 @@ packages:
       hookable: 5.5.3
       unhead: 1.1.32
       vue: 3.3.4
-    dev: true
-
-  /@vavt/md-editor-extension@3.0.0:
-    resolution: {integrity: sha512-ysM/shZo8x5ESPRSK65tqI3UaNE+r/EWlG69TxvNjhE+BnlNeSq2vPw121KCzq09vX0rRnOijN6hiQ3wi9JIMQ==}
     dev: true
 
   /@vavt/util@1.1.1:
