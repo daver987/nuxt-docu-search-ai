@@ -102,7 +102,7 @@ export default defineEventHandler(async (event: any) => {
     })
 
     const questionModel = new ChatOpenAI({
-      modelName: 'gpt-3.5-turbo',
+      modelName: 'gpt-4',
       openAIApiKey: config.OPENAI_API_KEY,
       temperature: 0,
     })
