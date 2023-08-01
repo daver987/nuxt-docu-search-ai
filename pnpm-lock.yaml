@@ -9,8 +9,8 @@ dependencies:
     specifier: ^0.1.6
     version: 0.1.6
   ai:
-    specifier: ^2.1.28
-    version: 2.1.28(react@18.2.0)(solid-js@1.7.8)(svelte@4.1.1)(vue@3.3.4)
+    specifier: ^2.1.29
+    version: 2.1.29(react@18.2.0)(solid-js@1.7.8)(svelte@4.1.1)(vue@3.3.4)
 
 devDependencies:
   '@headlessui/tailwindcss':
@@ -29,11 +29,11 @@ devDependencies:
     specifier: ^0.5.9
     version: 0.5.9(tailwindcss@3.3.3)
   '@types/node':
-    specifier: ^18.17.1
+    specifier: 18.17.1
     version: 18.17.1
   '@vueuse/core':
-    specifier: ^10.2.1
-    version: 10.2.1(vue@3.3.4)
+    specifier: ^10.3.0
+    version: 10.3.0(vue@3.3.4)
   '@vueuse/nuxt':
     specifier: ^10.3.0
     version: 10.3.0(nuxt@3.6.5)(vue@3.3.4)
@@ -41,8 +41,8 @@ devDependencies:
     specifier: ^5.3.0
     version: 5.3.0
   langchain:
-    specifier: 0.0.119
-    version: 0.0.119(@pinecone-database/pinecone@0.1.6)
+    specifier: 0.0.120
+    version: 0.0.120(@pinecone-database/pinecone@0.1.6)
   md-editor-v3:
     specifier: ^4.2.2
     version: 4.2.2(@codemirror/state@6.2.1)(@codemirror/view@6.15.3)(@lezer/common@1.0.3)(vue@3.3.4)
@@ -2658,8 +2658,8 @@ packages:
       indent-string: 4.0.0
     dev: true
 
-  /ai@2.1.28(react@18.2.0)(solid-js@1.7.8)(svelte@4.1.1)(vue@3.3.4):
-    resolution: {integrity: sha512-jPMI8UBhRUrr0U+HXPqr45xP7J/Kb13g6B4GRbF37vroOncfSNChCrE6PMS+witFxpD12QZ7T8V4eF8xdpUqXw==}
+  /ai@2.1.29(react@18.2.0)(solid-js@1.7.8)(svelte@4.1.1)(vue@3.3.4):
+    resolution: {integrity: sha512-YmTWqZEcMczjr1yuWN35C9XXI0PL/Pt57dRv73XyCfUrWs+r8nvP9kWXWoFM4Ii9RnvhIg8VsPxpA65B9KT+vA==}
     engines: {node: '>=14.6'}
     peerDependencies:
       react: ^18.2.0
@@ -5335,8 +5335,8 @@ packages:
     resolution: {integrity: sha512-Y+60/zizpJ3HRH8DCss+q95yr6145JXZo46OTpFvDZWLfRCE4qChOyk1b26nMaNpfHHgxagk9dXT5OP0Tfe+dQ==}
     dev: true
 
-  /langchain@0.0.119(@pinecone-database/pinecone@0.1.6):
-    resolution: {integrity: sha512-LIABHsHgtTVW6IqRofpdcThnPwqlTdak+vfC6moewg871qiSPQlA31mh3CMEvXAJ6HU+jzJz05uqO1BPEGgYYA==}
+  /langchain@0.0.120(@pinecone-database/pinecone@0.1.6):
+    resolution: {integrity: sha512-QDtoluHiyZnOWsweb3b7rW9ULj2HzGJqgWhxaGviwnA3SrE1om9BMKCY5eI0NMIL/dd5MutenGGlD+VGL0MVWA==}
     engines: {node: '>=18'}
     peerDependencies:
       '@aws-sdk/client-dynamodb': ^3.310.0
