@@ -29,8 +29,7 @@
     "@nuxthq/ui": "npm:@nuxthq/ui-edge@latest",
     "@tailwindcss/forms": "^0.5.4",
     "@tailwindcss/typography": "^0.5.9",
-    "@types/marked": "^5.0.1",
-    "@types/node": "^20",
+    "@types/node": "^18.17.1",
     "@vavt/md-editor-extension": "^3.0.0",
     "@vueuse/core": "^10.2.1",
     "@vueuse/nuxt": "^10.3.0",
@@ -47,10 +46,7 @@
   },
   "dependencies": {
     "@pinecone-database/pinecone": "^0.1.6",
-    "@upstash/redis": "^1.22.0",
-    "ai": "^2.1.28",
-    "clipboard": "^2.0.11",
-    "highlightjs-copy": "^1.0.4"
+    "ai": "^2.1.28"
   },
   "license": "MIT"
 }
