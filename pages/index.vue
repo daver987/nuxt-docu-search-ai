@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useChat } from 'ai/vue'
-import { scrollToBottom } from '~/utils/common'
 import { nextTick } from '#imports'
 import { MdPreview } from 'md-editor-v3'
 

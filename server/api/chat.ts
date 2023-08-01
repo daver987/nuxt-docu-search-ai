@@ -8,7 +8,6 @@ import { z } from 'zod'
 import { sendStreams } from '~/server/utils/sendStream'
 import chalk from 'chalk'
 import { AIMessage, HumanMessage } from 'langchain/schema'
-import { PromptTemplate } from 'langchain/prompts'
 
 const MessageSchema = z.object({
   role: z.enum(['system', 'user', 'assistant']),
@@ -66,14 +65,6 @@ Your goal is to assist users in understanding Nuxt 3, fostering growth while poi
 Follow-up question: <Rephrased question here>
 \`\`\`
 Your answer:`
-
-const promptTemplate = `Use the following pieces of context to answer the question at the end. If you don't know the answer, just say that you don't know, don't try to make up an answer.
-
-{context}
-
-Question: {question}
-Answer in Italian:`
-const prompt = PromptTemplate.fromTemplate(promptTemplate)
 
 export default defineEventHandler(async (event: any) => {
   try {
