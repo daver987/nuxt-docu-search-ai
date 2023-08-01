@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { useChat } from 'ai/vue'
 import { scrollToBottom } from '~/utils/common'
+import { nextTick } from '#imports'
+import { MdPreview } from 'md-editor-v3'
 
 const { messages, input, handleInputChange, handleSubmit } = useChat()
 
@@ -33,10 +35,10 @@ const countAndCompleteCodeBlocks = (text: string) => {
 
 watch(
   () => messages.value,
-  (val) => {
-    if (val) {
+  () => {
+    nextTick(() => {
       scrollToBottom(document.querySelector('.message-container'))
-    }
+    })
   },
   {
     deep: true,
@@ -89,7 +91,6 @@ watch(
               aria-label="Theme"
               @click="isDark = !isDark"
             />
-
             <template #fallback>
               <div class="h-8 w-8 rounded-full" />
             </template>
@@ -109,20 +110,20 @@ watch(
             class="m-1 mb-2 whitespace-pre-wrap py-2"
             v-if="message.role === 'user'"
           >
-            <div class="message align-center text-pre-wrap">
+            <div class="message-container align-center text-pre-wrap">
               <Icon class="mr-1.5" size="24px" name="solar:user-linear" />
               <span> {{ message.content }}</span>
             </div>
           </UCard>
-          <UCard class="py-2" v-else>
+          <UCard v-else>
+            <span class="pb-12 text-lg font-medium">GPT-4</span>
             <span
-              ><Icon
-                class="mr-1.5"
-                size="24px"
-                name="solar:soundwave-square-line-duotone"
-              />
-              <MarkdownRenderer :markdown="message.content" />
-            </span>
+              ><MdPreview
+                language="en-US"
+                theme="dark"
+                :editorId="message.id"
+                :modelValue="message.content"
+            /></span>
           </UCard>
         </template>
 

@@ -8,6 +8,7 @@ import { z } from 'zod'
 import { sendStreams } from '~/server/utils/sendStream'
 import chalk from 'chalk'
 import { AIMessage, HumanMessage } from 'langchain/schema'
+import { PromptTemplate } from 'langchain/prompts'
 
 const MessageSchema = z.object({
   role: z.enum(['system', 'user', 'assistant']),
@@ -48,7 +49,7 @@ async function initializePineconeStore(client: PineconeClient, config: any) {
   })
 }
 
-const CUSTOM_QUESTION_GENERATOR_CHAIN_PROMPT = `Given the following conversation and a follow up question, return the conversation history excerpt that includes any relevant context to the question if it exists and rephrase the follow up question to be a standalone question.
+const CUSTOM_QUESTION_GENERATOR_CHAIN_PROMPT = `Given the following conversation and a follow-up question, return the conversation history excerpt that includes any relevant context to the question if it exists and rephrase the follow up question to be a standalone question.
 Chat History:
 {chat_history}
 Follow-Up Input: {question}
@@ -62,9 +63,17 @@ Remember, Nuxt 3 auto-imports built-in composables, utilities, and components, s
 Your goal is to assist users in understanding Nuxt 3, fostering growth while pointing out potential pitfalls.
 ----------------
 <Relevant chat history excerpt as context here>
-Standalone question: <Rephrased question here>
+Follow-up question: <Rephrased question here>
 \`\`\`
 Your answer:`
+
+const promptTemplate = `Use the following pieces of context to answer the question at the end. If you don't know the answer, just say that you don't know, don't try to make up an answer.
+
+{context}
+
+Question: {question}
+Answer in Italian:`
+const prompt = PromptTemplate.fromTemplate(promptTemplate)
 
 export default defineEventHandler(async (event: any) => {
   try {

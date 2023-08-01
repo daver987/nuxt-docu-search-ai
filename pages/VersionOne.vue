@@ -1,20 +1,21 @@
 <script setup lang="ts">
 import { useChat } from 'ai/vue'
+import { scrollToBottom } from '~/utils/common'
+import { nextTick } from '#imports'
+import { MdPreview } from 'md-editor-v3'
 
 const { messages, input, handleInputChange, handleSubmit } = useChat()
 
 const colorMode = useColorMode()
 const isDark = computed({
   get: () => colorMode.value === 'dark',
-  set: (value: boolean) => (colorMode.preference = value ? 'dark' : 'light'),
+  set: (value) => (colorMode.preference = value ? 'light' : 'dark'),
 })
 
-// Define state variables
 const isOpen = ref(false)
 const q = ref('')
 const navInput = ref('')
 
-// Define shortcut keys with defineShortcuts
 defineShortcuts({
   meta_k: {
     usingInput: true,
@@ -23,6 +24,26 @@ defineShortcuts({
     },
   },
 })
+
+const countAndCompleteCodeBlocks = (text: string) => {
+  const codeBlocks = text.split('```').length - 1
+  if (codeBlocks && codeBlocks % 2 !== 0) {
+    return text + '\n```\n'
+  }
+  return text
+}
+
+watch(
+  () => messages.value,
+  () => {
+    nextTick(() => {
+      scrollToBottom(document.querySelector('.message-container'))
+    })
+  },
+  {
+    deep: true,
+  }
+)
 </script>
 
 <template>
@@ -70,7 +91,6 @@ defineShortcuts({
               aria-label="Theme"
               @click="isDark = !isDark"
             />
-
             <template #fallback>
               <div class="h-8 w-8 rounded-full" />
             </template>
@@ -79,64 +99,58 @@ defineShortcuts({
       </div>
     </div>
     <UContainer class="h-full p-6">
-      <div>
-        <UButton label="Open" @click="isOpen = true" />
+      <UCard
+        class="card-component mx-auto max-h-[650px] w-full max-w-4xl px-1"
+        :ui="{ divide: 'divide-y divide-gray-100 dark:divide-gray-800' }"
+      >
+        <template #header> Query the Nuxt Documentation...</template>
 
-        <UModal class="max-h-[500px]" v-model="isOpen">
+        <template v-for="message in messages" :key="message.id">
           <UCard
-            class="card-component mx-auto max-h-[650px] w-full max-w-3xl px-1"
-            :ui="{ divide: 'divide-y divide-gray-100 dark:divide-gray-800' }"
+            class="m-1 mb-2 whitespace-pre-wrap py-2"
+            v-if="message.role === 'user'"
           >
-            <template #header> Query the Nuxt Documentation...</template>
-            <div class="card-component max-h-[450px] w-full">
-              <UCard
-                v-for="message in messages"
-                :key="message.id"
-                class="m-1 mb-2 whitespace-pre-wrap"
-              >
-                <span
-                  ><Icon
-                    class="mr-1.5"
-                    size="24px"
-                    :name="
-                      message.role === 'user'
-                        ? 'solar:user-linear'
-                        : 'solar:soundwave-square-line-duotone'
-                    "
-                  />
-                  <span class="ml-1">{{
-                    message.role === 'user' ? 'User: ' : 'AI: '
-                  }}</span>
-                  <span class="ml-1">{{ message.content }}</span></span
-                >
-              </UCard>
+            <div class="message-container align-center text-pre-wrap">
+              <Icon class="mr-1.5" size="24px" name="solar:user-linear" />
+              <span> {{ message.content }}</span>
             </div>
-            <template #footer>
-              <form @submit="handleSubmit">
-                <UInput
-                  @change="handleInputChange"
-                  v-model="input"
-                  name="chatQuestion"
-                  placeholder="Search..."
-                  icon="i-heroicons-magnifying-glass-20-solid"
-                  :ui="{ icon: { trailing: { pointer: '' } } }"
-                >
-                  <template #trailing>
-                    <UButton
-                      v-show="q !== ''"
-                      color="gray"
-                      variant="link"
-                      icon="i-heroicons-x-mark-20-solid"
-                      :padded="false"
-                      @click="q = ''"
-                    />
-                  </template>
-                </UInput>
-              </form>
-            </template>
           </UCard>
-        </UModal>
-      </div>
+          <UCard v-else>
+            <span class="pb-12 text-lg font-medium">GPT-4</span>
+            <span
+              ><MdPreview
+                language="en-US"
+                theme="dark"
+                :editorId="message.id"
+                :modelValue="message.content"
+            /></span>
+          </UCard>
+        </template>
+
+        <template #footer>
+          <form @submit="handleSubmit">
+            <UInput
+              @change="handleInputChange"
+              v-model="input"
+              name="chatQuestion"
+              placeholder="Search..."
+              icon="i-heroicons-magnifying-glass-20-solid"
+              :ui="{ icon: { trailing: { pointer: '' } } }"
+            >
+              <template #trailing>
+                <UButton
+                  v-show="q !== ''"
+                  color="gray"
+                  variant="link"
+                  icon="i-heroicons-x-mark-20-solid"
+                  :padded="false"
+                  @click="q = ''"
+                />
+              </template>
+            </UInput>
+          </form>
+        </template>
+      </UCard>
     </UContainer>
   </div>
 </template>
