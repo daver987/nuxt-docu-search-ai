@@ -32,12 +32,17 @@ const countAndCompleteCodeBlocks = (text: string) => {
   return text
 }
 
+const scrollToBottom = () => {
+  const container = document.querySelector('.message-container');
+  if (container) {
+    container.scrollTop = container.scrollHeight;
+  }
+}
+
 watch(
   () => messages.value,
   () => {
-    nextTick(() => {
-      scrollToBottom(document.querySelector('.message-container'))
-    })
+    nextTick(scrollToBottom)
   },
   {
     deep: true,
