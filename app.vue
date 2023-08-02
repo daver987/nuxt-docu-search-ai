@@ -35,7 +35,10 @@ const countAndCompleteCodeBlocks = (text: string) => {
 const scrollToBottom = () => {
   const container = document.querySelector('.message-container')
   if (container) {
-    container.scrollTop = container.scrollHeight
+    const isAtBottom = container.scrollHeight - container.scrollTop === container.clientHeight
+    if (isAtBottom) {
+      container.scrollTop = container.scrollHeight
+    }
   }
 }
 
