@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onUpdated } from '#imports'
+import { ref, watch } from '#imports'
 import { MdPreview } from 'md-editor-v3'
 import { useChat } from 'ai/vue'
 
@@ -11,11 +11,13 @@ const state = {
 }
 const chatContainer = ref(null)
 
-onUpdated(() => {
+const scrollToBottom = () => {
   if (chatContainer.value) {
     chatContainer.value.scrollTop = chatContainer.value.scrollHeight
   }
-})
+}
+
+watch(messages, scrollToBottom, { immediate: true })
 </script>
 
 <template>
@@ -42,9 +44,8 @@ onUpdated(() => {
         </div>
       </template>
     </main>
-    <!-- Rest of the template -->
-  </div>
-</template>
+
+    <div
       class="sticky bottom-0 z-40 flex shrink-0 items-center gap-x-6 border-t border-white/5 bg-gray-900 px-4 shadow-sm sm:px-6 lg:px-8"
     >
       <div class="mx-auto w-full max-w-4xl bg-gray-900 py-8">
