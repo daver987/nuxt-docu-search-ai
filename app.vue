@@ -2,7 +2,6 @@
 import { useChat } from 'ai/vue'
 import { nextTick } from '#imports'
 import { MdPreview } from 'md-editor-v3'
-import { FormError } from '@nuxthq/ui-edge/dist/runtime/types'
 
 const { messages, input, handleSubmit } = useChat()
 
@@ -13,17 +12,10 @@ const isDark = computed({
 })
 const form = ref()
 const isOpen = ref(false)
-const q = ref('')
+const search = ref('')
 const navInput = ref('')
-const state = ref({
-  chatQuestion: undefined,
-})
-
-const validate = (state: any): FormError[] => {
-  const errors = []
-  if (!state.email) errors.push({ path: 'email', message: 'Required' })
-  if (!state.password) errors.push({ path: 'password', message: 'Required' })
-  return errors
+const state = {
+  inputState: input,
 }
 
 defineShortcuts({
@@ -55,11 +47,6 @@ watch(
     deep: true,
   }
 )
-
-async function submit() {
-  await form.value!.validate()
-  // Do something with state.value
-}
 </script>
 
 <template>
@@ -84,12 +71,12 @@ async function submit() {
             >
               <template #trailing>
                 <UButton
-                  v-show="q !== ''"
+                  v-show="search !== ''"
                   color="gray"
                   variant="link"
                   icon="i-heroicons-x-mark-20-solid"
                   :padded="false"
-                  @click="q = ''"
+                  @click="search = ''"
                 />
                 <UKbd class="p-0.5">⌘ K</UKbd>
               </template>
@@ -144,16 +131,11 @@ async function submit() {
         </template>
 
         <template #footer>
-          <UForm
-            ref="form"
-            :validate="validate"
-            :state="state"
-            @submit.prevent="handleSubmit"
-          >
+          <UForm ref="form" :state="state" @submit.prevent="handleSubmit">
             <UFormGroup label="Question" name="chatQuestion">
               <div class="relative">
                 <UTextarea
-                  v-model="state.chatQuestion"
+                  v-model="input"
                   placeholder="Ask any question to the AI about Nuxt 3..."
                   autoresize
                   :rows="3"
