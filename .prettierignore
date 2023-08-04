@@ -18,6 +18,8 @@ logs
 app.config.ts
 public
 pnpm-lock.yaml
+qodana.sarif.json
+qodana.yaml
 
 
 # Local env files

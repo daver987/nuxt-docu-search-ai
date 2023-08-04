@@ -2,18 +2,29 @@
 import { useChat } from 'ai/vue'
 import { nextTick } from '#imports'
 import { MdPreview } from 'md-editor-v3'
+import { FormError } from '@nuxthq/ui-edge/dist/runtime/types'
 
-const { messages, input, handleInputChange, handleSubmit } = useChat()
+const { messages, input, handleSubmit } = useChat()
 
 const colorMode = useColorMode()
 const isDark = computed({
   get: () => colorMode.value === 'dark',
   set: (value) => (colorMode.preference = value ? 'light' : 'dark'),
 })
-
+const form = ref()
 const isOpen = ref(false)
 const q = ref('')
 const navInput = ref('')
+const state = ref({
+  chatQuestion: undefined,
+})
+
+const validate = (state: any): FormError[] => {
+  const errors = []
+  if (!state.email) errors.push({ path: 'email', message: 'Required' })
+  if (!state.password) errors.push({ path: 'password', message: 'Required' })
+  return errors
+}
 
 defineShortcuts({
   meta_k: {
@@ -24,18 +35,11 @@ defineShortcuts({
   },
 })
 
-const countAndCompleteCodeBlocks = (text: string) => {
-  const codeBlocks = text.split('```').length - 1
-  if (codeBlocks && codeBlocks % 2 !== 0) {
-    return text + '\n```\n'
-  }
-  return text
-}
-
 const scrollToBottom = () => {
-  const container = document.querySelector('.message-container')
+  const container = document.querySelector('.scroll-container')
   if (container) {
-    const isAtBottom = container.scrollHeight - container.scrollTop === container.clientHeight
+    const isAtBottom =
+      container.scrollHeight - container.scrollTop === container.clientHeight
     if (isAtBottom) {
       container.scrollTop = container.scrollHeight
     }
@@ -51,6 +55,11 @@ watch(
     deep: true,
   }
 )
+
+async function submit() {
+  await form.value!.validate()
+  // Do something with state.value
+}
 </script>
 
 <template>
@@ -107,7 +116,7 @@ watch(
     </div>
     <UContainer class="h-full p-6">
       <UCard
-        class="card-component mx-auto max-h-[650px] w-full max-w-4xl px-1"
+        class="card-component scroll-container mx-auto max-h-[650px] w-full max-w-4xl px-1"
         :ui="{ divide: 'divide-y divide-gray-100 dark:divide-gray-800' }"
       >
         <template #header> Query the Nuxt Documentation...</template>
@@ -135,27 +144,33 @@ watch(
         </template>
 
         <template #footer>
-          <form @submit="handleSubmit">
-            <UInput
-              @change="handleInputChange"
-              v-model="input"
-              name="chatQuestion"
-              placeholder="Search..."
-              icon="i-heroicons-magnifying-glass-20-solid"
-              :ui="{ icon: { trailing: { pointer: '' } } }"
-            >
-              <template #trailing>
-                <UButton
-                  v-show="q !== ''"
-                  color="gray"
-                  variant="link"
-                  icon="i-heroicons-x-mark-20-solid"
-                  :padded="false"
-                  @click="q = ''"
+          <UForm
+            ref="form"
+            :validate="validate"
+            :state="state"
+            @submit.prevent="handleSubmit"
+          >
+            <UFormGroup label="Question" name="chatQuestion">
+              <div class="relative">
+                <UTextarea
+                  v-model="state.chatQuestion"
+                  placeholder="Ask any question to the AI about Nuxt 3..."
+                  autoresize
+                  :rows="2"
+                  class="pr-10"  <!-- Add padding to prevent text from being hidden by the button -->
                 />
-              </template>
-            </UInput>
-          </form>
+                <UButton
+                  icon="i-heroicons-paper-airplane"
+                  type="submit"
+                  size="sm"
+                  color="primary"
+                  square
+                  variant="solid"
+                  class="absolute top-2 right-2"  <!-- Position the button inside the textarea -->
+                />
+              </div>
+            </UFormGroup>
+          </UForm>
         </template>
       </UCard>
     </UContainer>
