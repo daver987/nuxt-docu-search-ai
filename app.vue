@@ -157,7 +157,7 @@ async function submit() {
                   placeholder="Ask any question to the AI about Nuxt 3..."
                   autoresize
                   :rows="2"
-                  class="pr-10"  <!-- Add padding to prevent text from being hidden by the button -->
+                  class="pr-10"
                 />
                 <UButton
                   icon="i-heroicons-paper-airplane"
@@ -166,7 +166,7 @@ async function submit() {
                   color="primary"
                   square
                   variant="solid"
-                  class="absolute top-2 right-2"  <!-- Position the button inside the textarea -->
+                  class="absolute right-2 bottom-2"  <!-- Position the button at the bottom of the textarea -->
                 />
               </div>
             </UFormGroup>
