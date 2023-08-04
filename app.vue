@@ -141,6 +141,8 @@ watch(
                   :rows="3"
                   class="pr-10"
                   size="sm"
+                  @keydown.enter.prevent="handleSubmit"
+                  @keydown.shift.enter="event => event.stopPropagation()"
                 />
                 <UButton
                   icon="i-heroicons-paper-airplane"
