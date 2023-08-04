@@ -156,8 +156,9 @@ async function submit() {
                   v-model="state.chatQuestion"
                   placeholder="Ask any question to the AI about Nuxt 3..."
                   autoresize
-                  :rows="2"
+                  :rows="3"
                   class="pr-10"
+                  size="sm"
                 />
                 <UButton
                   icon="i-heroicons-paper-airplane"
@@ -166,7 +167,7 @@ async function submit() {
                   color="primary"
                   square
                   variant="solid"
-                  class="absolute right-2 bottom-2"  <!-- Position the button at the bottom of the textarea -->
+                  class="absolute bottom-2 right-2"
                 />
               </div>
             </UFormGroup>
