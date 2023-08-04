@@ -8,15 +8,6 @@ const isDark = computed({
 })
 
 const isOpen = ref(false)
-
-defineShortcuts({
-  meta_k: {
-    usingInput: true,
-    handler: () => {
-      isOpen.value = !isOpen.value
-    },
-  },
-})
 </script>
 
 <template>
@@ -42,5 +33,3 @@ defineShortcuts({
     </div>
   </div>
 </template>
-
-<style scoped></style>

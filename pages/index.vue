@@ -6,19 +6,9 @@ import { useChat } from 'ai/vue'
 const { messages, input, handleSubmit } = useChat()
 
 const form = ref()
-const isOpen = ref(false)
 const state = {
   inputState: input,
 }
-
-defineShortcuts({
-  meta_k: {
-    usingInput: true,
-    handler: () => {
-      isOpen.value = !isOpen.value
-    },
-  },
-})
 </script>
 
 <template>
