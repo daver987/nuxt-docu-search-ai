@@ -27,6 +27,6 @@ export default defineNuxtConfig({
     LANGCHAIN_PROJECT: process.env.LANGCHAIN_PROJECT,
   },
   nitro: {
-    preset: 'vercel-edge',
+    preset: process.env.NITRO_PRESET,
   },
 })
