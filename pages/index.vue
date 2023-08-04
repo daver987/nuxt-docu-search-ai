@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from '#imports'
+import { ref, onUpdated } from '#imports'
 import { MdPreview } from 'md-editor-v3'
 import { useChat } from 'ai/vue'
 
@@ -9,11 +9,18 @@ const form = ref()
 const state = {
   inputState: input,
 }
+const chatContainer = ref(null)
+
+onUpdated(() => {
+  if (chatContainer.value) {
+    chatContainer.value.scrollTop = chatContainer.value.scrollHeight
+  }
+})
 </script>
 
 <template>
   <div>
-    <main class="min-h-[75dvh]">
+    <main class="min-h-[75dvh]" ref="chatContainer">
       <template v-for="message in messages" :key="message.id">
         <div v-if="message.role === 'user'" class="bg-gray-700 p-8">
           <div class="mx-auto max-w-4xl">
@@ -35,7 +42,9 @@ const state = {
         </div>
       </template>
     </main>
-    <div
+    <!-- Rest of the template -->
+  </div>
+</template>
       class="sticky bottom-0 z-40 flex shrink-0 items-center gap-x-6 border-t border-white/5 bg-gray-900 px-4 shadow-sm sm:px-6 lg:px-8"
     >
       <div class="mx-auto w-full max-w-4xl bg-gray-900 py-8">
