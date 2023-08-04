@@ -8,6 +8,9 @@ export default defineNuxtConfig({
     dataValue: 'theme',
     classSuffix: '',
   },
+  build: {
+    transpile: ['@headlessui/vue'],
+  },
   css: [
     '~/assets/css/main.css',
     'md-editor-v3/lib/style.css',
