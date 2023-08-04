@@ -2,6 +2,12 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxthq/ui', '@vueuse/nuxt', 'nuxt-icon'],
+  app: {
+    pageTransition: {
+      name: 'side-fade',
+      mode: 'out-in', // default
+    },
+  },
 
   colorMode: {
     preference: 'system',

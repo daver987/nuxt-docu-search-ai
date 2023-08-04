@@ -7,3 +7,15 @@
     </div>
   </div>
 </template>
+
+<style>
+.side-fade-enter-active,
+.side-fade-leave-active {
+  transition: all 0.4s ease-in-out;
+}
+.side-fade-enter-from,
+.side-fade-leave-to {
+  transform: translateX(-10%);
+  opacity: 0;
+}
+</style>

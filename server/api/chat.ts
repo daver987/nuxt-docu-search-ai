@@ -6,7 +6,6 @@ import { OpenAIEmbeddings } from 'langchain/embeddings/openai'
 import { PineconeStore } from 'langchain/vectorstores/pinecone'
 import { z } from 'zod'
 import { sendStreams } from '~/server/utils/sendStream'
-import chalk from 'chalk'
 import { AIMessage, HumanMessage } from 'langchain/schema'
 
 const MessageSchema = z.object({
@@ -80,7 +79,6 @@ export default defineEventHandler(async (event: any) => {
     const body = await readBody(event)
 
     const { messages } = ChatSchema.parse(body)
-    console.log(chalk.magentaBright(JSON.stringify(messages)))
 
     const question = messages[messages.length - 1].content
 

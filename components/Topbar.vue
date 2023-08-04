@@ -1,13 +1,9 @@
 <script lang="ts" setup>
-import { ref } from '#imports'
-
 const colorMode = useColorMode()
 const isDark = computed({
   get: () => colorMode.value === 'dark',
   set: (value) => (colorMode.preference = value ? 'light' : 'dark'),
 })
-
-const isOpen = ref(false)
 </script>
 
 <template>
