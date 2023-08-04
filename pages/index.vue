@@ -17,12 +17,18 @@ const scrollToBottom = () => {
   }
 }
 
-watch(messages, scrollToBottom, { immediate: true })
+watch(
+  input,
+  () => {
+    scrollToBottom()
+  },
+  { immediate: true }
+)
 </script>
 
 <template>
-  <div>
-    <main class="min-h-[75dvh]" ref="chatContainer">
+  <div ref="chatContainer">
+    <main class="min-h-[75dvh]">
       <template v-for="message in messages" :key="message.id">
         <div v-if="message.role === 'user'" class="bg-gray-700 p-8">
           <div class="mx-auto max-w-4xl">
