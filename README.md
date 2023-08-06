@@ -16,7 +16,7 @@ for handling and manipulating high-dimensional vector data.
 3. [Usage](#usage)
 4. [Building for Production](#building-for-production)
 5. [Contribution](#contribution)
-6. [License](#license))
+6. [License](#license)
 
 ## Project Structure
 
