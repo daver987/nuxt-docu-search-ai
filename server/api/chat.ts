@@ -65,7 +65,7 @@ Follow-up question: <Rephrased question here>
 \`\`\`
 Your answer:`
 
-export default defineEventHandler(async (event: any) => {
+export default defineEventHandler(async (event) => {
   try {
     const config = getConfig()
 
