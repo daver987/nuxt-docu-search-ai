@@ -1,6 +1,6 @@
 import { H3Event } from 'h3'
 
-interface EnhancedResponse {
+interface EventNodeRes {
   _data: BodyInit | ReadableStream<Uint8Array>
   socket?: unknown
 
@@ -9,20 +9,20 @@ interface EnhancedResponse {
   end(): void
 }
 
-interface EnhancedEvent {
+interface EnhancedEventNode {
   _handled: boolean
   node: {
-    res: EnhancedResponse & H3Event['node']['res']
+    res: EventNodeRes
   }
 }
 
-type ExtendedH3Event = H3Event & EnhancedEvent
+export type ExtendedH3Event = H3Event & EnhancedEventNode
 
 export function sendStreams(
-  event: H3Event | ExtendedH3Event,
+  event: ExtendedH3Event,
   stream: ReadableStream<Uint8Array>
 ): void {
-  if ('_data' in event.node.res) {
+  if (event.node.res) {
     event._handled = true
     event.node.res._data = stream
 

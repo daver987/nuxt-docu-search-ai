@@ -5,8 +5,15 @@ import { ChatOpenAI } from 'langchain/chat_models/openai'
 import { OpenAIEmbeddings } from 'langchain/embeddings/openai'
 import { PineconeStore } from 'langchain/vectorstores/pinecone'
 import { z } from 'zod'
-import { sendStreams } from '~/server/utils/sendStream'
+import { ExtendedH3Event, sendStreams } from '~/server/utils/sendStream'
 import { AIMessage, HumanMessage } from 'langchain/schema'
+
+interface Config {
+  PINECONE_API_KEY: string
+  PINECONE_ENVIRONMENT: string
+  PINECONE_INDEX: string
+  OPENAI_API_KEY: string
+}
 
 const MessageSchema = z.object({
   role: z.enum(['system', 'user', 'assistant']),
@@ -21,7 +28,7 @@ const ChatSchema = z.object({
 
 export const runtime = 'edge'
 
-function getConfig() {
+function getConfig(): Config {
   return {
     PINECONE_API_KEY: useRuntimeConfig().PINECONE_API_KEY,
     PINECONE_ENVIRONMENT: useRuntimeConfig().PINECONE_ENVIRONMENT,
@@ -30,7 +37,7 @@ function getConfig() {
   }
 }
 
-async function initializePineconeClient(config: any) {
+async function initializePineconeClient(config: Config) {
   const client = new PineconeClient()
   await client.init({
     apiKey: config.PINECONE_API_KEY,
@@ -39,7 +46,7 @@ async function initializePineconeClient(config: any) {
   return client
 }
 
-async function initializePineconeStore(client: PineconeClient, config: any) {
+async function initializePineconeStore(client: PineconeClient, config: Config) {
   const pineconeIndex = client.Index(config.PINECONE_INDEX)
 
   return await PineconeStore.fromExistingIndex(new OpenAIEmbeddings(), {
@@ -125,7 +132,7 @@ export default defineEventHandler(async (event) => {
       [handlers]
     )
 
-    return sendStreams(event, stream)
+    return sendStreams(event as ExtendedH3Event, stream)
   } catch (error: any) {
     console.error(error.message)
     return error.message
