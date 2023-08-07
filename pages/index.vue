@@ -60,7 +60,9 @@ watch(
     <div
       class="sticky bottom-0 z-40 flex shrink-0 items-center gap-x-6 border-t border-black/10 bg-gray-200 px-4 shadow-sm dark:border-white/5 dark:bg-gray-900 sm:px-6 lg:px-8"
     >
-      <div class="mx-auto w-full max-w-4xl bg-gray-200 py-8 dark:bg-gray-900">
+      <div
+        class="mx-auto w-full max-w-4xl bg-gray-200 pb-3 pt-6 dark:bg-gray-900"
+      >
         <UForm ref="form" :state="state" @submit.prevent="handleSubmit">
           <UFormGroup
             name="chatQuestion"
