@@ -109,12 +109,12 @@ export default defineEventHandler(async (event) => {
     const questionModel = new ChatOpenAI({
       modelName: 'gpt-4',
       openAIApiKey: config.OPENAI_API_KEY,
-      temperature: 0,
+      temperature: 0.5,
     })
 
     const chain = ConversationalRetrievalQAChain.fromLLM(
       streamingModel,
-      vectorStore.asRetriever(20),
+      vectorStore.asRetriever(30),
       {
         verbose: true,
         questionGeneratorChainOptions: {
