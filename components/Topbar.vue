@@ -1,23 +1,28 @@
 <script lang="ts" setup>
 const colorMode = useColorMode()
+
 const isDark = computed({
-  get: () => colorMode.value === 'dark',
-  set: (value) => (colorMode.preference = value ? 'light' : 'dark'),
+  get() {
+    return colorMode.value === 'dark'
+  },
+  set() {
+    colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
+  },
 })
 </script>
 
 <template>
   <div
-    class="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-6 border-b border-white/5 bg-gray-900 px-4 shadow-sm sm:px-6 lg:px-8"
+    class="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-6 border-b border-black/10 bg-gray-200 px-4 shadow-sm dark:border-white/5 dark:bg-gray-900 sm:px-6 lg:px-8"
   >
     <span>Query the Nuxt Documentation...</span>
-    <div class="flex flex-1 justify-end gap-x-4 self-stretch lg:gap-x-6">
+    <div class="flex flex-1 justify-end gap-x-4 lg:gap-x-6">
       <ClientOnly>
         <UButton
           :icon="
             isDark ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'
           "
-          color="gray"
+          color="green"
           variant="ghost"
           aria-label="Theme"
           @click="isDark = !isDark"

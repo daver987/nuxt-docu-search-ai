@@ -1,6 +1,6 @@
 {
   "name": "nuxt-docu-search-ai",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "A single-page application that combines the power of GPT-4 and Nuxt 3 documentation to assist developers in enhancing their coding skills.",
   "repository": "https://github.com/daver987/nuxt-docu-search-ai",
   "author": "David Robertson <info@drobertson.pro>",
@@ -27,6 +27,7 @@
     "@headlessui/tailwindcss": "^0.2.0",
     "@nuxt/devtools": "latest",
     "@nuxthq/ui": "npm:@nuxthq/ui-edge@latest",
+    "@nuxthq/ui-edge": "2.7.0-28189225.00b6282",
     "@tailwindcss/forms": "^0.5.4",
     "@types/node": "18.17.1",
     "@vueuse/nuxt": "^10.3.0",

@@ -83,7 +83,7 @@ const sidebarOpen = ref(false)
             </TransitionChild>
             <!-- Sidebar component, swap this element with another sidebar if you like -->
             <div
-              class="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6 ring-1 ring-white/10"
+              class="flex grow flex-col gap-y-5 overflow-y-auto px-6 ring-1 ring-white/10 dark:bg-gray-900"
             >
               <div class="flex h-16 shrink-0 items-center">
                 <img class="h-8 w-auto" src="/favicon.ico" alt="Nuxt Logo" />
@@ -115,7 +115,7 @@ const sidebarOpen = ref(false)
                     >
                       <Icon
                         name="heroicons:user-circle"
-                        class="h-8 w-8 rounded-full bg-gray-800"
+                        class="h-8 w-8 rounded-full dark:bg-gray-800"
                       />
                       <span class="sr-only">App User</span>
                       <span aria-hidden="true">User</span>
@@ -132,12 +132,12 @@ const sidebarOpen = ref(false)
   <!-- Static sidebar for desktop -->
   <div class="hidden xl:fixed xl:inset-y-0 xl:z-50 xl:flex xl:w-72 xl:flex-col">
     <div
-      class="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6 ring-1 ring-white/5"
+      class="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-300 px-6 ring-1 ring-black/10 dark:bg-gray-900 dark:ring-white/5"
     >
-      <div class="flex h-16 shrink-0 items-center justify-around">
+      <ULink to="/" class="flex h-16 shrink-0 items-center justify-around">
         <img class="h-8 w-auto" src="/favicon.ico" alt="Nuxt Logo" />
         <span class="mr-8">Nuxt DocuSearch AI</span>
-      </div>
+      </ULink>
       <nav class="flex flex-1 flex-col">
         <ul role="list" class="flex flex-1 flex-col gap-y-7">
           <li>
@@ -145,12 +145,12 @@ const sidebarOpen = ref(false)
               <li v-for="item in navigation" :key="item.name">
                 <NuxtLink
                   :to="item.href"
-                  active-class="bg-gray-800 text-white"
-                  class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white"
+                  active-class="bg-gray-200 text-gray-900 dark:bg-gray-800 dark:text-white"
+                  class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 hover:bg-gray-400 hover:text-gray-800 dark:text-gray-400 dark:hover:bg-gray-800"
                 >
                   <Icon
                     :name="item.icon"
-                    class="h-6 w-6 shrink-0"
+                    class="gray-900 dark:gray-200 h-6 w-6 shrink-0"
                     aria-hidden="true"
                   />
                   {{ item.name }}
@@ -163,12 +163,9 @@ const sidebarOpen = ref(false)
           <li class="-mx-6 mt-auto">
             <NuxtLink
               href="#"
-              class="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-white hover:bg-gray-800"
+              class="flex items-center gap-x-4 border border-x-0 border-b-0 border-t-white/5 bg-gray-200 px-6 py-3 text-sm font-semibold leading-6 hover:bg-gray-400 dark:bg-gray-900 dark:text-white dark:hover:bg-gray-900/90"
             >
-              <Icon
-                name="heroicons:user-circle"
-                class="h-8 w-8 rounded-full bg-gray-800"
-              />
+              <Icon name="heroicons:user-circle" class="h-8 w-8 rounded-full" />
               <span class="sr-only">User</span>
               <span aria-hidden="true">User</span>
             </NuxtLink>

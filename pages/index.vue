@@ -30,13 +30,19 @@ watch(
   <div ref="chatContainer">
     <main class="min-h-[75dvh]">
       <template v-for="message in messages" :key="message.id">
-        <div v-if="message.role === 'user'" class="bg-gray-700 p-8">
+        <div
+          v-if="message.role === 'user'"
+          class="border-b border-black/10 p-8 dark:bg-gray-700"
+        >
           <div class="mx-auto max-w-4xl">
             <Icon class="mr-1.5" size="24px" name="solar:user-linear" />
             <span> {{ message.content }}</span>
           </div>
         </div>
-        <div v-else class="bg-gray-800 p-8">
+        <div
+          v-else
+          class="border-b border-black/10 bg-gray-200 p-8 dark:bg-gray-800"
+        >
           <div class="mx-auto max-w-4xl">
             <span class="pb-12 text-lg font-medium">Nuxt-AI</span>
             <span
@@ -52,11 +58,15 @@ watch(
     </main>
 
     <div
-      class="sticky bottom-0 z-40 flex shrink-0 items-center gap-x-6 border-t border-white/5 bg-gray-900 px-4 shadow-sm sm:px-6 lg:px-8"
+      class="sticky bottom-0 z-40 flex shrink-0 items-center gap-x-6 border-t border-black/10 bg-gray-200 px-4 shadow-sm dark:border-white/5 dark:bg-gray-900 sm:px-6 lg:px-8"
     >
-      <div class="mx-auto w-full max-w-4xl bg-gray-900 py-8">
+      <div class="mx-auto w-full max-w-4xl bg-gray-200 py-8 dark:bg-gray-900">
         <UForm ref="form" :state="state" @submit.prevent="handleSubmit">
-          <UFormGroup name="chatQuestion">
+          <UFormGroup
+            name="chatQuestion"
+            help="Tip: For best results, make sure to include the main keyword related to your query.
+"
+          >
             <div class="relative">
               <UTextarea
                 v-model="input"

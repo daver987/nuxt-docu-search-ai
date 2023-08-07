@@ -22,6 +22,9 @@ devDependencies:
   '@nuxthq/ui':
     specifier: npm:@nuxthq/ui-edge@latest
     version: /@nuxthq/ui-edge@2.7.0-28189225.00b6282(vue@3.3.4)(webpack@5.88.2)
+  '@nuxthq/ui-edge':
+    specifier: 2.7.0-28189225.00b6282
+    version: 2.7.0-28189225.00b6282(vue@3.3.4)(webpack@5.88.2)
   '@tailwindcss/forms':
     specifier: ^0.5.4
     version: 0.5.4(tailwindcss@3.3.3)
@@ -5754,7 +5757,6 @@ packages:
     engines: {node: '>=12'}
     dependencies:
       '@jridgewell/sourcemap-codec': 1.4.15
-    dev: true
 
   /magicast@0.2.10:
     resolution: {integrity: sha512-Ah2qatigknxwmoYCd9hx/mmVyrRNhDKiaWZIuW4gL6dWrAGMoOpCVkQ3VpGWARtkaJVFhe8uIphcsxDzLPQUyg==}
@@ -8177,7 +8179,7 @@ packages:
       estree-walker: 3.0.3
       is-reference: 3.0.1
       locate-character: 3.0.0
-      magic-string: 0.30.1
+      magic-string: 0.30.2
       periscopic: 3.1.0
     dev: false
 
@@ -8863,7 +8865,7 @@ packages:
       '@vue/compiler-dom': 3.3.4
       esno: 0.16.3
       kolorist: 1.8.0
-      magic-string: 0.30.1
+      magic-string: 0.30.2
       shell-quote: 1.8.1
       vite: 4.4.6(@types/node@18.17.1)
     transitivePeerDependencies:
