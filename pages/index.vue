@@ -60,7 +60,7 @@ watch(
             <div class="relative">
               <UTextarea
                 v-model="input"
-                placeholder="Ask any question to the AI about Nuxt 3..."
+                placeholder="Type your Nuxt 3 query here... e.g., 'How do I set up middleware in Nuxt 3?'"
                 autoresize
                 :rows="3"
                 class="pr-10"

@@ -10,9 +10,5 @@ module.exports = {
     `App.{js,ts,vue}`,
     `app.{js,ts,vue}`,
   ],
-  plugins: [
-    require('@headlessui/tailwindcss'),
-    require('@tailwindcss/forms'),
-    require('@tailwindcss/typography'),
-  ],
+  plugins: [require('@headlessui/tailwindcss'), require('@tailwindcss/forms')],
 }

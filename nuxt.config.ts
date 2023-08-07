@@ -5,7 +5,7 @@ export default defineNuxtConfig({
   app: {
     pageTransition: {
       name: 'side-fade',
-      mode: 'out-in', // default
+      mode: 'out-in',
     },
   },
 
@@ -17,11 +17,7 @@ export default defineNuxtConfig({
   build: {
     transpile: ['@headlessui/vue'],
   },
-  css: [
-    '~/assets/css/main.css',
-    'md-editor-v3/lib/style.css',
-    'md-editor-v3/lib/preview.css',
-  ],
+  css: ['md-editor-v3/lib/style.css', 'md-editor-v3/lib/preview.css'],
   runtimeConfig: {
     OPENAI_API_KEY: process.env.OPENAI_API_KEY,
     PINECONE_API_KEY: process.env.PINECONE_API_KEY,
