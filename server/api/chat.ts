@@ -7,6 +7,7 @@ import { PineconeStore } from 'langchain/vectorstores/pinecone'
 import { z } from 'zod'
 import { ExtendedH3Event, sendStreams } from '~/server/utils/sendStream'
 import { AIMessage, HumanMessage } from 'langchain/schema'
+import chalk from 'chalk'
 
 interface Config {
   PINECONE_API_KEY: string
@@ -84,8 +85,11 @@ export default defineEventHandler(async (event) => {
     const vectorStore = await initializePineconeStore(client, config)
 
     const body = await readBody(event)
+    console.log(chalk.blueBright(typeof body))
+    console.log('Body', chalk.red(body))
 
     const { messages } = ChatSchema.parse(body)
+    console.log('Messages', chalk.red(messages))
 
     const question = messages[messages.length - 1].content
 
