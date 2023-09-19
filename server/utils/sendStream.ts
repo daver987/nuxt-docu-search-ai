@@ -93,6 +93,7 @@ async function handleError(error: Error, res?: EventNodeRes): Promise<void> {
   if (error.message.includes('Error piping to stream') && res?._data) {
     try {
       const chunkedData = res._data as Uint8Array
+      // noinspection JSUnusedLocalSymbols
       const jsonData = JSON.parse(new TextDecoder().decode(chunkedData))
 
       res.write(chunkedData)

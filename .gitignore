@@ -7,7 +7,6 @@ dist
 
 # Node dependencies
 node_modules
-bun.lockb
 
 # Logs
 logs
