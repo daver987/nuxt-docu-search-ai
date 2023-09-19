@@ -1,34 +1,29 @@
 <script setup lang="ts">
-import { ref, watch } from '#imports'
+import { ref, watchEffect } from '#imports'
 import { MdPreview } from 'md-editor-v3'
 import { useChat } from 'ai/vue'
+import type { Message } from 'ai'
+import type { Ref } from 'vue'
+import { vAutoAnimate } from '@formkit/auto-animate'
 
-const { messages, input, handleSubmit } = useChat()
+const messageState: Ref<Message[] | null> = useState('messages', () => null)
+
+const { messages, input, handleSubmit } = useChat({
+  headers: { 'Content-Type': 'application/json' },
+})
+watchEffect(() => {
+  messageState.value = messages.value
+})
 
 const form = ref()
 const state = {
   inputState: input,
 }
-const chatContainer = ref(null)
-
-const scrollToBottom = () => {
-  if (chatContainer.value) {
-    chatContainer.value.scrollTop = chatContainer.value.scrollHeight
-  }
-}
-
-watch(
-  input,
-  () => {
-    scrollToBottom()
-  },
-  { immediate: true }
-)
 </script>
 
 <template>
   <div ref="chatContainer">
-    <main class="min-h-[75dvh]">
+    <main class="min-h-[75dvh]" v-auto-animate>
       <template v-for="message in messages" :key="message.id">
         <div
           v-if="message.role === 'user'"
@@ -66,8 +61,7 @@ watch(
         <UForm ref="form" :state="state" @submit.prevent="handleSubmit">
           <UFormGroup
             name="chatQuestion"
-            help="Tip: For best results, make sure to include the main keyword related to your query.
-"
+            help="Tip: For best results, make sure to include the main keyword related to your query."
           >
             <div class="relative">
               <UTextarea
@@ -75,7 +69,6 @@ watch(
                 placeholder="Type your Nuxt 3 query here... e.g., 'How do I set up middleware in Nuxt 3?'"
                 autoresize
                 :rows="3"
-                class="pr-10"
                 size="sm"
                 @keydown.enter.prevent="handleSubmit"
                 @keydown.shift.enter="(event: any) => event.stopPropagation()"

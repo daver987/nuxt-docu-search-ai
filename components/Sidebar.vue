@@ -81,7 +81,7 @@ const sidebarOpen = ref(false)
                 </button>
               </div>
             </TransitionChild>
-            <!-- Sidebar component, swap this element with another sidebar if you like -->
+            <!-- Sidebar component -->
             <div
               class="flex grow flex-col gap-y-5 overflow-y-auto px-6 ring-1 ring-white/10 dark:bg-gray-900"
             >
@@ -129,6 +129,7 @@ const sidebarOpen = ref(false)
       </div>
     </Dialog>
   </TransitionRoot>
+
   <!-- Static sidebar for desktop -->
   <div class="hidden xl:fixed xl:inset-y-0 xl:z-50 xl:flex xl:w-72 xl:flex-col">
     <div
@@ -159,7 +160,7 @@ const sidebarOpen = ref(false)
             </ul>
           </li>
 
-          <!--            logged in user-->
+          <!--  logged in user  -->
           <li class="-mx-6 mt-auto">
             <NuxtLink
               href="#"

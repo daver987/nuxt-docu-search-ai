@@ -1,14 +1,21 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ['@nuxthq/ui', '@vueuse/nuxt', 'nuxt-icon'],
+  modules: [
+    '@nuxt/ui',
+    '@vueuse/nuxt',
+    'nuxt-icon',
+    '@formkit/auto-animate/nuxt',
+  ],
   app: {
     pageTransition: {
       name: 'side-fade',
       mode: 'out-in',
     },
   },
-
+  ui: {
+    global: true,
+  },
   colorMode: {
     preference: 'system',
     dataValue: 'theme',

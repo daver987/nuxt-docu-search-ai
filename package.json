@@ -26,25 +26,27 @@
   "devDependencies": {
     "@headlessui/tailwindcss": "^0.2.0",
     "@nuxt/devtools": "latest",
-    "@nuxthq/ui": "npm:@nuxthq/ui-edge@latest",
-    "@nuxthq/ui-edge": "2.7.0-28189225.00b6282",
-    "@tailwindcss/forms": "^0.5.4",
-    "@types/node": "18.17.1",
-    "@vueuse/nuxt": "^10.3.0",
+    "@nuxt/ui": "npm:@nuxt/ui-edge@latest",
+    "@nuxthq/ui-edge": "2.7.0-28223581.ead87a9",
+    "@tailwindcss/forms": "^0.5.6",
+    "@types/node": "20.6.2",
+    "@vueuse/components": "^10.4.1",
+    "@vueuse/nuxt": "^10.4.1",
     "chalk": "^5.3.0",
-    "langchain": "0.0.123",
-    "md-editor-v3": "^4.2.2",
-    "nuxt": "^3.6.5",
-    "nuxt-icon": "^0.4.2",
+    "langchain": "0.0.151",
+    "md-editor-v3": "^4.6.2",
+    "nuxt": "^3.7.3",
+    "nuxt-icon": "^0.5.0",
     "openai-edge": "^1.2.2",
-    "prettier": "^3.0.1",
-    "prettier-plugin-tailwindcss": "^0.4.1",
+    "prettier": "^3.0.3",
+    "prettier-plugin-tailwindcss": "^0.5.4",
     "typescript": "latest",
-    "zod": "^3.21.4"
+    "zod": "^3.22.2"
   },
   "dependencies": {
-    "@pinecone-database/pinecone": "^0.1.6",
-    "ai": "^2.1.32"
+    "@formkit/auto-animate": "^0.8.0",
+    "@pinecone-database/pinecone": "^1.0.1",
+    "ai": "^2.2.13"
   },
   "license": "MIT"
 }
