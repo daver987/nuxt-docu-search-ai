@@ -1,6 +1,6 @@
 {
   "name": "nuxt-docu-search-ai",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "A single-page application that combines the power of GPT-4 and Nuxt 3 documentation to assist developers in enhancing their coding skills.",
   "repository": "https://github.com/daver987/nuxt-docu-search-ai",
   "author": "David Robertson <info@drobertson.pro>",
@@ -16,7 +16,8 @@
   },
   "prettier": {
     "plugins": [
-      "prettier-plugin-tailwindcss"
+      "prettier-plugin-tailwindcss",
+      "prettier-plugin-organize-attributes"
     ],
     "trailingComma": "es5",
     "tabWidth": 2,
@@ -27,26 +28,26 @@
     "@headlessui/tailwindcss": "^0.2.0",
     "@nuxt/devtools": "latest",
     "@nuxt/ui": "npm:@nuxt/ui-edge@latest",
-    "@nuxthq/ui-edge": "2.7.0-28223581.ead87a9",
     "@tailwindcss/forms": "^0.5.6",
-    "@types/node": "20.6.2",
-    "@vueuse/components": "^10.4.1",
-    "@vueuse/nuxt": "^10.4.1",
+    "@types/node": "20.8.4",
+    "@vueuse/components": "^10.5.0",
+    "@vueuse/nuxt": "^10.5.0",
     "chalk": "^5.3.0",
-    "langchain": "0.0.151",
-    "md-editor-v3": "^4.6.2",
-    "nuxt": "^3.7.3",
+    "langchain": "0.0.163",
+    "md-editor-v3": "^4.7.0",
+    "nuxt": "npm:nuxt3@3.8.0-28276489.5397e93f",
     "nuxt-icon": "^0.5.0",
     "openai-edge": "^1.2.2",
     "prettier": "^3.0.3",
-    "prettier-plugin-tailwindcss": "^0.5.4",
+    "prettier-plugin-organize-attributes": "^1.0.0",
+    "prettier-plugin-tailwindcss": "^0.5.5",
     "typescript": "latest",
-    "zod": "^3.22.2"
+    "zod": "^3.22.4"
   },
   "dependencies": {
     "@formkit/auto-animate": "^0.8.0",
-    "@pinecone-database/pinecone": "^1.0.1",
-    "ai": "^2.2.13"
+    "@pinecone-database/pinecone": "^1.1.0",
+    "ai": "^2.2.14"
   },
   "license": "MIT"
 }

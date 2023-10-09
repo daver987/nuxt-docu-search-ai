@@ -32,7 +32,7 @@ watch(
 <template>
   <div>
     <Sidebar />
-    <div ref="el" class="min-h-screen bg-gray-100 dark:bg-gray-800 xl:pl-72">
+    <div class="min-h-screen bg-gray-100 dark:bg-gray-800 xl:pl-72" ref="el">
       <Topbar />
       <NuxtPage />
     </div>

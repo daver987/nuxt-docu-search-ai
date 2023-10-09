@@ -28,8 +28,8 @@ const sidebarOpen = ref(false)
 <template>
   <TransitionRoot as="template" :show="sidebarOpen">
     <Dialog
-      as="div"
       class="relative z-50 xl:hidden"
+      as="div"
       @close="sidebarOpen = false"
     >
       <TransitionChild
@@ -68,14 +68,14 @@ const sidebarOpen = ref(false)
                 class="absolute left-full top-0 flex w-16 justify-center pt-5"
               >
                 <button
-                  type="button"
                   class="-m-2.5 p-2.5"
+                  type="button"
                   @click="sidebarOpen = false"
                 >
                   <span class="sr-only">Close sidebar</span>
                   <Icon
-                    name="heroicons:x-mark"
                     class="h-6 w-6 text-white"
+                    name="heroicons:x-mark"
                     aria-hidden="true"
                   />
                 </button>
@@ -89,18 +89,18 @@ const sidebarOpen = ref(false)
                 <img class="h-8 w-auto" src="/favicon.ico" alt="Nuxt Logo" />
               </div>
               <nav class="flex flex-1 flex-col">
-                <ul role="list" class="flex flex-1 flex-col gap-y-7">
+                <ul class="flex flex-1 flex-col gap-y-7" role="list">
                   <li>
-                    <ul role="list" class="-mx-2 space-y-1">
+                    <ul class="-mx-2 space-y-1" role="list">
                       <li v-for="item in navigation" :key="item.name">
                         <NuxtLink
+                          class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white"
                           active-class="bg-gray-800 text-white"
                           :href="item.href"
-                          class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white"
                         >
                           <Icon
-                            :name="item.icon"
                             class="h-6 w-6 shrink-0"
+                            :name="item.icon"
                             aria-hidden="true"
                           />
                           {{ item.name }}
@@ -110,12 +110,12 @@ const sidebarOpen = ref(false)
                   </li>
                   <li class="-mx-6 mt-auto">
                     <NuxtLink
-                      href="#"
                       class="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-white hover:bg-gray-800"
+                      href="#"
                     >
                       <Icon
-                        name="heroicons:user-circle"
                         class="h-8 w-8 rounded-full dark:bg-gray-800"
+                        name="heroicons:user-circle"
                       />
                       <span class="sr-only">App User</span>
                       <span aria-hidden="true">User</span>
@@ -135,23 +135,23 @@ const sidebarOpen = ref(false)
     <div
       class="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-300 px-6 ring-1 ring-black/10 dark:bg-gray-900 dark:ring-white/5"
     >
-      <ULink to="/" class="flex h-16 shrink-0 items-center justify-around">
+      <ULink class="flex h-16 shrink-0 items-center justify-around" to="/">
         <img class="h-8 w-auto" src="/favicon.ico" alt="Nuxt Logo" />
         <span class="mr-8">Nuxt DocuSearch AI</span>
       </ULink>
       <nav class="flex flex-1 flex-col">
-        <ul role="list" class="flex flex-1 flex-col gap-y-7">
+        <ul class="flex flex-1 flex-col gap-y-7" role="list">
           <li>
-            <ul role="list" class="-mx-2 space-y-1">
+            <ul class="-mx-2 space-y-1" role="list">
               <li v-for="item in navigation" :key="item.name">
                 <NuxtLink
+                  class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 hover:bg-gray-400 hover:text-gray-800 dark:text-gray-400 dark:hover:bg-gray-800"
                   :to="item.href"
                   active-class="bg-gray-200 text-gray-900 dark:bg-gray-800 dark:text-white"
-                  class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 hover:bg-gray-400 hover:text-gray-800 dark:text-gray-400 dark:hover:bg-gray-800"
                 >
                   <Icon
-                    :name="item.icon"
                     class="gray-900 dark:gray-200 h-6 w-6 shrink-0"
+                    :name="item.icon"
                     aria-hidden="true"
                   />
                   {{ item.name }}
@@ -163,10 +163,10 @@ const sidebarOpen = ref(false)
           <!--  logged in user  -->
           <li class="-mx-6 mt-auto">
             <NuxtLink
-              href="#"
               class="flex items-center gap-x-4 border border-x-0 border-b-0 border-t-white/5 bg-gray-200 px-6 py-3 text-sm font-semibold leading-6 hover:bg-gray-400 dark:bg-gray-900 dark:text-white dark:hover:bg-gray-900/90"
+              href="#"
             >
-              <Icon name="heroicons:user-circle" class="h-8 w-8 rounded-full" />
+              <Icon class="h-8 w-8 rounded-full" name="heroicons:user-circle" />
               <span class="sr-only">User</span>
               <span aria-hidden="true">User</span>
             </NuxtLink>

@@ -6,13 +6,30 @@ import type { Message } from 'ai'
 import type { Ref } from 'vue'
 import { vAutoAnimate } from '@formkit/auto-animate'
 
+definePageMeta({
+  keepalive: true,
+})
+
 const messageState: Ref<Message[] | null> = useState('messages', () => null)
+const chatContainer = ref<HTMLElement | null>(null)
+const { y } = useScroll(chatContainer, { behavior: 'smooth' })
 
 const { messages, input, handleSubmit } = useChat({
   headers: { 'Content-Type': 'application/json' },
 })
 watchEffect(() => {
   messageState.value = messages.value
+})
+
+watch(messages, async () => {
+  await nextTick()
+  const container = chatContainer.value
+  if (container) {
+    const targetY = container.scrollHeight - container.clientHeight
+    if (targetY > 0 && y.value < targetY - container.clientHeight * 0.2) {
+      y.value = targetY - container.clientHeight * 0.2
+    }
+  }
 })
 
 const form = ref()
@@ -26,8 +43,8 @@ const state = {
     <main class="min-h-[75dvh]" v-auto-animate>
       <template v-for="message in messages" :key="message.id">
         <div
-          v-if="message.role === 'user'"
           class="border-b border-black/10 p-8 dark:bg-gray-700"
+          v-if="message.role === 'user'"
         >
           <div class="mx-auto max-w-4xl">
             <Icon class="mr-1.5" size="24px" name="solar:user-linear" />
@@ -35,8 +52,8 @@ const state = {
           </div>
         </div>
         <div
-          v-else
           class="border-b border-black/10 bg-gray-200 p-8 dark:bg-gray-800"
+          v-else
         >
           <div class="mx-auto max-w-4xl">
             <span class="pb-12 text-lg font-medium">Nuxt-AI</span>
@@ -74,13 +91,13 @@ const state = {
                 @keydown.shift.enter="(event: any) => event.stopPropagation()"
               />
               <UButton
+                class="absolute bottom-2 right-2"
                 icon="i-heroicons-paper-airplane"
                 type="submit"
                 size="sm"
                 color="primary"
                 square
                 variant="solid"
-                class="absolute bottom-2 right-2"
               />
             </div>
           </UFormGroup>
