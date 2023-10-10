@@ -1,9 +1,20 @@
-import OpenAI from 'openai'
-import { OpenAIStream } from 'ai'
-import { ChatCompletionMessageParam } from 'openai/resources/chat'
+import { LangChainStream, Message } from 'ai'
+import { ChatOpenAI } from 'langchain/chat_models/openai'
+import { AIMessage, HumanMessage } from 'langchain/schema'
+import { sendStreams } from '~/server/utils/sendStream'
+import { H3Event } from 'h3'
+import { z, zh } from 'h3-zod'
+
+export const runtime = 'edge'
 
 interface Config {
   OPENAI_API_KEY: string
+}
+
+interface SystemMessage {
+  role: 'system'
+  content: string
+  id: string
 }
 
 function getConfig(): Config {
@@ -12,34 +23,60 @@ function getConfig(): Config {
   }
 }
 
-const initOpenai = (apiKey: string) => {
-  return new OpenAI({
-    apiKey: apiKey,
+const initLangchain = (apiKey: string) => {
+  return new ChatOpenAI({
+    modelName: 'ft:gpt-3.5-turbo-0613:personal::87mRjTyU',
+    openAIApiKey: apiKey,
+    streaming: true,
+    temperature: 0.3,
   })
 }
 
-export default defineEventHandler(async (event) => {
+const systemMessage: SystemMessage = {
+  role: 'system',
+  content:
+    'You are a helpful assistant who is an expert in Nuxt 3. Make sure your answers are detailed and helpful.',
+  id: '123',
+}
+
+export default defineEventHandler(async (event: H3Event) => {
+  const body = await zh.useValidatedBody(
+    event,
+    z.object({
+      messages: z.array(
+        z.object({
+          id: z.string(),
+          createdAt: z.date().optional(),
+          content: z.string(),
+          role: z.enum(['system', 'user', 'assistant', 'function']),
+          name: z.string().optional(),
+          function_call: z.string().optional(),
+        })
+      ),
+    })
+  )
   const config = getConfig()
-  const openai = initOpenai(config.OPENAI_API_KEY)
+  const llm = initLangchain(config.OPENAI_API_KEY)
 
-  // Extract the `prompt` from the body of the request
-  const { messages } = (await readBody(event)) as {
-    messages: ChatCompletionMessageParam[]
-  }
+  const { messages } = body
+  messages.push(systemMessage)
 
-  const response = await openai.chat.completions.create({
-    model: 'ft:gpt-3.5-turbo-0613:personal::87mRjTyU',
-    stream: true,
-    messages: messages.map((message) => ({
-      content: message.content,
-      role: message.role,
-    })),
-    temperature: 0.3,
-    max_tokens: 2048,
-    top_p: 1,
-    frequency_penalty: 0,
-    presence_penalty: 0,
-  })
-  // Convert the response into a friendly text-stream
-  return OpenAIStream(response)
+  console.log('Message:', messages)
+
+  const { stream, handlers } = LangChainStream()
+
+  llm
+    .call(
+      (messages as Message[]).map((message) =>
+        message.role === 'user'
+          ? new HumanMessage(message.content)
+          : new AIMessage(message.content)
+      ),
+      {},
+      [handlers]
+    )
+    // eslint-disable-next-line no-console
+    .catch(console.error)
+
+  return sendStreams(event as ExtendedH3Event, stream)
 })
