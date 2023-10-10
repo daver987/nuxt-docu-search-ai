@@ -1,5 +1,4 @@
-import swrv from 'swrv'
-import { ref, unref, createChunkDecoder, nanoid } from '#imports'
+import { ref, unref, createChunkDecoder, nanoid, useFetch } from '#imports'
 import type { Ref } from 'vue'
 
 import type {
@@ -87,7 +86,7 @@ export function useChat({
       const previousMessages = messages.value
       mutate(messagesSnapshot)
 
-      const res = await fetch(api, {
+      const res = await $fetch(api, {
         method: 'POST',
         body: JSON.stringify({
           messages: sendExtraMessageFields
@@ -103,7 +102,6 @@ export function useChat({
           ...headers,
           ...options?.headers,
         },
-        signal: abortController.signal,
         credentials,
       }).catch((err) => {
         // Restore the previous messages if the request fails.
@@ -119,16 +117,7 @@ export function useChat({
         }
       }
 
-      if (!res.ok) {
-        // Restore the previous messages if the request fails.
-        mutate(previousMessages)
-        throw new Error(
-          (await res.text()) || 'Failed to fetch the chat response.'
-        )
-      }
-      if (!res.body) {
-        throw new Error('The response body is empty.')
-      }
+      // No need to check for res.ok or res.body as $fetch will automatically throw an error for non-2xx status codes and parse the JSON response.
 
       let result = ''
       const createdAt = new Date()
