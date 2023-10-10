@@ -72,10 +72,7 @@ export function useChat({
   const error = ref<undefined | Error>(undefined)
 
   let abortController: AbortController | null = null
-  async function triggerRequest(
-    messagesSnapshot: Message[],
-    options?: RequestOptions
-  ) {
+  async function triggerRequest(options?: RequestOptions) {
     try {
       error.value = undefined
       mutateLoading(() => true)
@@ -83,15 +80,14 @@ export function useChat({
 
       // Do an optimistic update to the chat state to show the updated messages
       // immediately.
-      const previousMessages = messages.value
-      mutate(messagesSnapshot)
+      mutate(messages.value)
 
       const res = await $fetch(api, {
         method: 'POST',
         body: JSON.stringify({
           messages: sendExtraMessageFields
-            ? messagesSnapshot
-            : messagesSnapshot.map(({ role, content }) => ({
+            ? messages.value
+            : messages.value.map(({ role, content }) => ({
                 role,
                 content,
               })),
@@ -103,10 +99,6 @@ export function useChat({
           ...options?.headers,
         },
         credentials,
-      }).catch((err) => {
-        // Restore the previous messages if the request fails.
-        mutate(previousMessages)
-        throw err
       })
 
       if (onResponse) {
@@ -133,7 +125,7 @@ export function useChat({
         // Update the chat state with the new message tokens.
         result += decoder(value)
         mutate([
-          ...messagesSnapshot,
+          ...messages.value,
           {
             id: replyId,
             createdAt,
@@ -181,18 +173,18 @@ export function useChat({
     if (!message.id) {
       message.id = nanoid()
     }
-    return triggerRequest(messages.value.concat(message as Message), options)
+    messages.value = messages.value.concat(message as Message)
+    return triggerRequest(options)
   }
 
   const reload: UseChatHelpers['reload'] = async (options) => {
-    const messagesSnapshot = messages.value
-    if (messagesSnapshot.length === 0) return null
+    if (messages.value.length === 0) return null
 
-    const lastMessage = messagesSnapshot[messagesSnapshot.length - 1]
+    const lastMessage = messages.value[messages.value.length - 1]
     if (lastMessage.role === 'assistant') {
-      return triggerRequest(messagesSnapshot.slice(0, -1), options)
+      messages.value = messages.value.slice(0, -1)
     }
-    return triggerRequest(messagesSnapshot, options)
+    return triggerRequest(options)
   }
 
   const stop = () => {
