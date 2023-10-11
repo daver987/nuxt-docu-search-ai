@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { ref, watchEffect, useChat } from '#imports'
+import { ref, watchEffect } from '#imports'
 import { MdPreview } from 'md-editor-v3'
-import type { Message } from '~/types'
+import { useChat } from 'ai/vue'
+import type { Message } from 'ai'
 import type { Ref } from 'vue'
 import { vAutoAnimate } from '@formkit/auto-animate'
 
@@ -9,44 +10,21 @@ definePageMeta({
   keepalive: true,
 })
 
-useSeoMeta({
-  title: ' NuxtDocuSearchAi: Your AI-Powered Nuxt 3 Documentation',
-  description:
-    'Elevate your understanding of Nuxt 3 with NuxtDocuSearchAi. Get enhanced explanations and feature suggestions from our fine tuned AI.',
-  ogTitle: 'NuxtDocuSearchAi: Your AI-Powered Guide to Nuxt 3 Documentation',
-  ogDescription:
-    'Unlock deeper insights into Nuxt 3 features and best practices with our AI-enhanced guide.',
-  ogImage: '[og:image]',
-  ogUrl: '[og:url]',
-  twitterTitle: 'Discover Nuxt 3 with NuxtDocuSearchAi',
-  twitterDescription:
-    'Navigate Nuxt 3 like a pro with AI-powered insights and recommendations.',
-  twitterImage: '[twitter:image]',
-  twitterCard: 'summary',
-})
-
-useHead({
-  htmlAttrs: {
-    lang: 'en',
-  },
-  link: [
-    {
-      rel: 'icon',
-      type: 'image/png',
-      href: '/favicon.png',
-    },
-  ],
-})
-
 const messageState: Ref<Message[] | null> = useState('messages', () => null)
 const chatContainer = ref<HTMLElement | null>(null)
 const { y } = useScroll(chatContainer, { behavior: 'smooth' })
 
-const { messages, input, handleSubmit } = useChat({
+const { messages, input, handleSubmit, isLoading } = useChat({
   headers: { 'Content-Type': 'application/json' },
 })
 watchEffect(() => {
   messageState.value = messages.value
+})
+
+watch(isLoading, async (newValue) => {
+  if (!newValue) {
+    console.log('Done Loading', messages)
+  }
 })
 
 watch(messages, async () => {

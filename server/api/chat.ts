@@ -1,7 +1,7 @@
 import { LangChainStream, Message } from 'ai'
 import { ChatOpenAI } from 'langchain/chat_models/openai'
 import { AIMessage, HumanMessage } from 'langchain/schema'
-import { sendStreams } from '~/server/utils/sendStream'
+import { ExtendedH3Event, sendStreams } from '~/server/utils/sendStream'
 import { H3Event } from 'h3'
 import { z, zh } from 'h3-zod'
 
@@ -45,8 +45,8 @@ export default defineEventHandler(async (event: H3Event) => {
     z.object({
       messages: z.array(
         z.object({
-          id: z.string(),
-          createdAt: z.date().optional(),
+          id: z.string().optional(),
+          createdAt: z.string().optional(),
           content: z.string(),
           role: z.enum(['system', 'user', 'assistant', 'function']),
           name: z.string().optional(),
@@ -77,6 +77,5 @@ export default defineEventHandler(async (event: H3Event) => {
     )
     // eslint-disable-next-line no-console
     .catch(console.error)
-
   return sendStreams(event as ExtendedH3Event, stream)
 })
