@@ -25,7 +25,6 @@
     "singleQuote": true
   },
   "devDependencies": {
-    "@headlessui/tailwindcss": "^0.2.0",
     "@nuxt/devtools": "latest",
     "@nuxt/ui": "npm:@nuxt/ui-edge@latest",
     "@tailwindcss/forms": "^0.5.6",

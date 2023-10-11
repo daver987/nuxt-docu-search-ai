@@ -14,6 +14,10 @@ export default defineNuxtConfig({
     },
   },
 
+  build: {
+    transpile: ['@highlightjs/vue-plugin'],
+  },
+
   ui: {
     global: true,
   },

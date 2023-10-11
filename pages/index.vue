@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { ref, watchEffect } from '#imports'
-import { MdPreview } from 'md-editor-v3'
 import { useChat } from 'ai/vue'
 import type { Message } from 'ai'
 import type { Ref } from 'vue'
 import { vAutoAnimate } from '@formkit/auto-animate'
+import { MdPreview } from 'md-editor-v3'
 
 definePageMeta({
   keepalive: true,

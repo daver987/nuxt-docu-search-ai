@@ -17,21 +17,6 @@ interface SystemMessage {
   id: string
 }
 
-function getConfig(): Config {
-  return {
-    OPENAI_API_KEY: useRuntimeConfig().OPENAI_API_KEY,
-  }
-}
-
-const initLangchain = (apiKey: string) => {
-  return new ChatOpenAI({
-    modelName: 'ft:gpt-3.5-turbo-0613:personal::87mRjTyU',
-    openAIApiKey: apiKey,
-    streaming: true,
-    temperature: 0.3,
-  })
-}
-
 const systemMessage: SystemMessage = {
   role: 'system',
   content:
@@ -40,6 +25,21 @@ const systemMessage: SystemMessage = {
 }
 
 export default defineEventHandler(async (event: H3Event) => {
+  const initLangchain = (apiKey: string) => {
+    return new ChatOpenAI({
+      modelName: 'ft:gpt-3.5-turbo-0613:personal::87mRjTyU',
+      openAIApiKey: apiKey,
+      streaming: true,
+      temperature: 0.3,
+    })
+  }
+
+  function getConfig(): Config {
+    return {
+      OPENAI_API_KEY: useRuntimeConfig().OPENAI_API_KEY,
+    }
+  }
+
   const body = await zh.useValidatedBody(
     event,
     z.object({
@@ -55,6 +55,7 @@ export default defineEventHandler(async (event: H3Event) => {
       ),
     })
   )
+
   const config = getConfig()
   const llm = initLangchain(config.OPENAI_API_KEY)
 

@@ -2,6 +2,7 @@
 const toast = useToast()
 const formRef = ref()
 const state = ref({})
+
 const handleSubmit = () => {
   return toast.add({ title: 'Feature not yet implemented' })
 }
@@ -18,7 +19,6 @@ const handleSubmit = () => {
         <UFormGroup name="apikey" label="Open AI Api Key">
           <UInput type="text" placeholder="Enter API key..." />
         </UFormGroup>
-
         <template #footer>
           <UButton type="submit">Save API Key</UButton>
         </template>
