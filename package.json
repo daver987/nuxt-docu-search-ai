@@ -10,6 +10,7 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
+    "start": "node .output/server/index.mjs",
     "postinstall": "nuxt prepare",
     "lint": "prettier --check .",
     "lint:fix": "prettier --write ."
@@ -28,25 +29,25 @@
     "@nuxt/devtools": "latest",
     "@nuxt/ui": "npm:@nuxt/ui-edge@latest",
     "@tailwindcss/forms": "^0.5.6",
-    "@types/node": "20.8.4",
+    "@types/node": "20.8.5",
     "@vueuse/components": "^10.5.0",
     "@vueuse/nuxt": "^10.5.0",
     "chalk": "^5.3.0",
     "h3-zod": "^0.5.1",
-    "langchain": "0.0.165",
-    "md-editor-v3": "^4.7.0",
+    "langchain": "0.0.166",
+    "md-editor-v3": "^4.8.0",
     "nuxt": "npm:nuxt3@3.8.0-28276489.5397e93f",
     "nuxt-icon": "^0.5.0",
-    "openai-edge": "^1.2.2",
+    "openai": "^4.12.1",
     "prettier": "^3.0.3",
     "prettier-plugin-organize-attributes": "^1.0.0",
-    "prettier-plugin-tailwindcss": "^0.5.5",
+    "prettier-plugin-tailwindcss": "^0.5.6",
     "typescript": "latest",
     "zod": "^3.22.4"
   },
   "dependencies": {
     "@formkit/auto-animate": "^0.8.0",
-    "ai": "^2.2.14"
+    "ai": "^2.2.15"
   },
   "license": "MIT"
 }

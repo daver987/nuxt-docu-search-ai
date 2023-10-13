@@ -6,6 +6,35 @@ import type { Ref } from 'vue'
 import { vAutoAnimate } from '@formkit/auto-animate'
 import { MdPreview } from 'md-editor-v3'
 
+useSeoMeta({
+  title: 'NuxtDocuSearchAi - AI Powered Nuxt 3 Documentation Search',
+  description:
+    'Experience the power of AI in searching the Nuxt 3 documentation with NuxtDocuSearchAi. Discover content faster and more efficiently.',
+  ogTitle: 'NuxtDocuSearchAi - AI Powered Nuxt 3 Documentation Search',
+  ogDescription:
+    'Unleash the potential of AI driven search for Nuxt 3 documentation. Dive into topics with unprecedented ease.',
+  ogImage: '/images/nuxt-og-image.png',
+  ogUrl: 'https://nuxtDocusearchAi.com',
+  twitterTitle: 'Discover Nuxt 3 Docs with AI - NuxtDocuSearchAi',
+  twitterDescription:
+    'Transform your documentation search experience with AI-powered NuxtDocuSearchAi. Find what you need in seconds.',
+  twitterImage: '/images/nuxt-og-image.png',
+  twitterCard: 'summary',
+})
+
+useHead({
+  htmlAttrs: {
+    lang: 'en',
+  },
+  link: [
+    {
+      rel: 'icon',
+      type: 'image/png',
+      href: '/favicon.ico',
+    },
+  ],
+})
+
 definePageMeta({
   keepalive: true,
 })
@@ -69,6 +98,9 @@ const state = {
                 theme="dark"
                 :editorId="message.id"
                 :modelValue="message.content"
+                scrollAuto
+                readonly
+                autoDetectCode
             /></span>
           </div>
         </div>

@@ -15,7 +15,7 @@ export default defineNuxtConfig({
   },
 
   build: {
-    transpile: ['@highlightjs/vue-plugin'],
+    transpile: ['openai-edge'],
   },
 
   ui: {
