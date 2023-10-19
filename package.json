@@ -29,25 +29,28 @@
     "@nuxt/devtools": "latest",
     "@nuxt/ui": "npm:@nuxt/ui-edge@latest",
     "@tailwindcss/forms": "^0.5.6",
-    "@types/node": "20.8.5",
+    "@types/node": "20.8.7",
     "@vueuse/components": "^10.5.0",
     "@vueuse/nuxt": "^10.5.0",
     "chalk": "^5.3.0",
-    "h3-zod": "^0.5.1",
-    "langchain": "0.0.166",
-    "md-editor-v3": "^4.8.0",
-    "nuxt": "npm:nuxt3@3.8.0-28276489.5397e93f",
+    "h3-zod": "^0.5.2",
+    "langchain": "0.0.168",
+    "markdown-it": "^13.0.2",
+    "markdown-it-shikiji": "^0.6.10",
+    "md-editor-v3": "^4.8.1",
+    "nuxt": "npm:nuxt-nightly@3.8.0-28294029.5652346d",
     "nuxt-icon": "^0.5.0",
-    "openai": "^4.12.1",
+    "openai": "^4.12.4",
     "prettier": "^3.0.3",
     "prettier-plugin-organize-attributes": "^1.0.0",
     "prettier-plugin-tailwindcss": "^0.5.6",
+    "shikiji": "^0.6.10",
     "typescript": "latest",
     "zod": "^3.22.4"
   },
   "dependencies": {
     "@formkit/auto-animate": "^0.8.0",
-    "ai": "^2.2.15"
+    "ai": "^2.2.16"
   },
   "license": "MIT"
 }

@@ -9,6 +9,7 @@ export const runtime = 'edge'
 
 interface Config {
   OPENAI_API_KEY: string
+  OPENAI_FINE_TUNED: string
 }
 
 interface SystemMessage {
@@ -25,9 +26,9 @@ const systemMessage: SystemMessage = {
 }
 
 export default defineEventHandler(async (event: H3Event) => {
-  const initLangchain = (apiKey: string) => {
+  const initLangchain = (apiKey: string, chatModel: string) => {
     return new ChatOpenAI({
-      modelName: 'ft:gpt-3.5-turbo-0613:personal::87mRjTyU',
+      modelName: chatModel,
       openAIApiKey: apiKey,
       streaming: true,
       temperature: 0.3,
@@ -37,10 +38,12 @@ export default defineEventHandler(async (event: H3Event) => {
   function getConfig(): Config {
     return {
       OPENAI_API_KEY: useRuntimeConfig().OPENAI_API_KEY,
+      OPENAI_FINE_TUNED: useRuntimeConfig().OPENAI_FINE_TUNED,
     }
   }
 
   const body = await zh.useValidatedBody(
+    //@ts-ignore
     event,
     z.object({
       messages: z.array(
@@ -57,7 +60,7 @@ export default defineEventHandler(async (event: H3Event) => {
   )
 
   const config = getConfig()
-  const llm = initLangchain(config.OPENAI_API_KEY)
+  const llm = initLangchain(config.OPENAI_API_KEY, config.OPENAI_FINE_TUNED)
 
   const { messages } = body
   messages.push(systemMessage)

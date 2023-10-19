@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { ref, watchEffect } from '#imports'
+import { ref, watch } from '#imports'
 import { useChat } from 'ai/vue'
 import type { Message } from 'ai'
 import type { Ref } from 'vue'
 import { vAutoAnimate } from '@formkit/auto-animate'
 import { MdPreview } from 'md-editor-v3'
+import { useParsedEscapedString } from '~/composables/useParsedEscapedString'
 
 useSeoMeta({
   title: 'NuxtDocuSearchAi - AI Powered Nuxt 3 Documentation Search',
@@ -39,15 +40,21 @@ definePageMeta({
   keepalive: true,
 })
 
-const messageState: Ref<Message[] | null> = useState('messages', () => null)
-const chatContainer = ref<HTMLElement | null>(null)
-const { y } = useScroll(chatContainer, { behavior: 'smooth' })
-
 const { messages, input, handleSubmit, isLoading } = useChat({
   headers: { 'Content-Type': 'application/json' },
 })
-watchEffect(() => {
-  messageState.value = messages.value
+const parsedMessages: Ref<Message[]> = ref([])
+
+watch(messages, (newMessages) => {
+  parsedMessages.value = newMessages.map((message) => {
+    if (message.role === 'assistant') {
+      return {
+        ...message,
+        content: useParsedEscapedString(message.content),
+      }
+    }
+    return message
+  })
 })
 
 watch(isLoading, async (newValue) => {
@@ -56,27 +63,23 @@ watch(isLoading, async (newValue) => {
   }
 })
 
-watch(messages, async () => {
-  await nextTick()
-  const container = chatContainer.value
-  if (container) {
-    const targetY = container.scrollHeight - container.clientHeight
-    if (targetY > 0 && y.value < targetY - container.clientHeight * 0.2) {
-      y.value = targetY - container.clientHeight * 0.2
-    }
+const handleTextareaKeydown = (
+  event: KeyboardEvent,
+  submitFunction: Function
+) => {
+  if (event.shiftKey) {
+    event.preventDefault()
+    input.value += '\n'
+  } else {
+    submitFunction(event)
   }
-})
-
-const form = ref()
-const state = {
-  inputState: input,
 }
 </script>
 
 <template>
-  <div ref="chatContainer">
+  <div>
     <main class="min-h-[75dvh]" v-auto-animate>
-      <template v-for="message in messages" :key="message.id">
+      <template v-for="message in parsedMessages" :key="message.id">
         <div
           class="border-b border-black/10 p-8 dark:bg-gray-700"
           v-if="message.role === 'user'"
@@ -113,7 +116,7 @@ const state = {
       <div
         class="mx-auto w-full max-w-4xl bg-gray-200 pb-3 pt-6 dark:bg-gray-900"
       >
-        <UForm ref="form" :state="state" @submit.prevent="handleSubmit">
+        <form @submit.prevent="handleSubmit">
           <UFormGroup
             name="chatQuestion"
             help="Tip: For best results, make sure to include the main keyword related to your query."
@@ -125,7 +128,10 @@ const state = {
                 autoresize
                 :rows="3"
                 size="sm"
-                @keydown.enter.prevent="handleSubmit"
+                @keydown.enter="
+                  (event: KeyboardEvent) =>
+                    handleTextareaKeydown(event, handleSubmit)
+                "
                 @keydown.shift.enter="(event: any) => event.stopPropagation()"
               />
               <UButton
@@ -136,11 +142,18 @@ const state = {
                 color="primary"
                 square
                 variant="solid"
+                @click="handleSubmit"
               />
             </div>
           </UFormGroup>
-        </UForm>
+        </form>
       </div>
     </div>
   </div>
 </template>
+
+<style>
+code {
+  padding: 12px;
+}
+</style>
