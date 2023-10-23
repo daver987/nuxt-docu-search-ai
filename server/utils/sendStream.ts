@@ -1,4 +1,4 @@
-import { H3Event } from 'h3'
+import { H3Event, EventHandlerRequest } from 'h3'
 import * as net from 'net'
 
 type SocketType = net.Socket
@@ -19,7 +19,7 @@ interface EnhancedEventNode {
   }
 }
 
-export type ExtendedH3Event = H3Event & EnhancedEventNode
+export type ExtendedH3Event = H3Event<EventHandlerRequest> & EnhancedEventNode
 
 export async function sendStreams(
   event: ExtendedH3Event,

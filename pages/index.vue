@@ -38,6 +38,7 @@ useHead({
 
 definePageMeta({
   keepalive: true,
+  colorMode: 'dark',
 })
 
 const { messages, input, handleSubmit, isLoading } = useChat({
@@ -111,10 +112,10 @@ const handleTextareaKeydown = (
     </main>
 
     <div
-      class="sticky bottom-0 z-40 flex shrink-0 items-center gap-x-6 border-t border-black/10 bg-gray-200 px-4 shadow-sm dark:border-white/5 dark:bg-gray-900 sm:px-6 lg:px-8"
+      class="sticky bottom-0 z-40 flex shrink-0 items-center gap-x-6 border-t border-black/10 bg-gray-200 px-4 shadow-sm dark:border-white/5 dark:bg-gray-950 sm:px-6 lg:px-8"
     >
       <div
-        class="mx-auto w-full max-w-4xl bg-gray-200 pb-3 pt-6 dark:bg-gray-900"
+        class="mx-auto w-full max-w-4xl bg-gray-200 pb-3 pt-6 dark:bg-gray-950"
       >
         <form @submit.prevent="handleSubmit">
           <UFormGroup
@@ -124,7 +125,7 @@ const handleTextareaKeydown = (
             <div class="relative">
               <UTextarea
                 v-model="input"
-                placeholder="Type your Nuxt 3 query here... e.g., 'How do I set up middleware in Nuxt 3?'"
+                placeholder="Type your Nuxt query here... e.g., 'Can you show me an advanced example of how to use useState?'"
                 autoresize
                 :rows="3"
                 size="sm"

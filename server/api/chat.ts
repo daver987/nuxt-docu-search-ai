@@ -1,8 +1,8 @@
 import { LangChainStream, Message } from 'ai'
 import { ChatOpenAI } from 'langchain/chat_models/openai'
 import { AIMessage, HumanMessage } from 'langchain/schema'
-import { ExtendedH3Event, sendStreams } from '~/server/utils/sendStream'
-import { H3Event } from 'h3'
+import { type ExtendedH3Event, sendStreams } from '~/server/utils/sendStream'
+import type { H3Event } from 'h3'
 import { z, zh } from 'h3-zod'
 
 export const runtime = 'edge'
@@ -21,27 +21,27 @@ interface SystemMessage {
 const systemMessage: SystemMessage = {
   role: 'system',
   content:
-    'You are a helpful assistant who is an expert in Nuxt 3. Make sure your answers are detailed and helpful.',
+    "As an AI assistant specializing in Nuxt 3, it's your responsibility to provide comprehensive and insightful responses to queries about this JavaScript framework. When providing code examples, ensure they are strictly aligned with the latest Nuxt 3 syntax, and refrain from using outdated Nuxt 2 syntax. Your responses should be detailed, informative, and aimed at enabling users to understand and effectively apply the knowledge in their projects.",
   id: '123',
 }
 
+function getConfig(): Config {
+  return {
+    OPENAI_API_KEY: useRuntimeConfig().OPENAI_API_KEY,
+    OPENAI_FINE_TUNED: useRuntimeConfig().OPENAI_FINE_TUNED,
+  }
+}
+
+const initLangchain = (apiKey: string, chatModel: string) => {
+  return new ChatOpenAI({
+    modelName: chatModel,
+    openAIApiKey: apiKey,
+    streaming: true,
+    temperature: 0.2,
+  })
+}
+
 export default defineEventHandler(async (event: H3Event) => {
-  const initLangchain = (apiKey: string, chatModel: string) => {
-    return new ChatOpenAI({
-      modelName: chatModel,
-      openAIApiKey: apiKey,
-      streaming: true,
-      temperature: 0.3,
-    })
-  }
-
-  function getConfig(): Config {
-    return {
-      OPENAI_API_KEY: useRuntimeConfig().OPENAI_API_KEY,
-      OPENAI_FINE_TUNED: useRuntimeConfig().OPENAI_FINE_TUNED,
-    }
-  }
-
   const body = await zh.useValidatedBody(
     //@ts-ignore
     event,

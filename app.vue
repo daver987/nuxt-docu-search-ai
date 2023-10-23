@@ -9,6 +9,7 @@
       <Topbar />
       <NuxtPage />
     </div>
+    <UNotifications />
   </div>
 </template>
 

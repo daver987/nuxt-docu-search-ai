@@ -7,18 +7,27 @@ import {
   TransitionRoot,
 } from '@headlessui/vue'
 
-const navigation = [
+const links = [
   {
-    name: 'Chats',
-    href: '/',
-    icon: 'heroicons:chat-bubble-bottom-center-text',
-    current: false,
+    label: 'Chats',
+    to: '/',
+    icon: 'i-heroicons-chat-bubble-bottom-center-text',
+    color: 'text-green-500',
   },
   {
-    name: 'Settings',
-    href: '/settings',
-    icon: 'heroicons:cog-6-tooth',
-    current: true,
+    label: 'Settings',
+    to: '/settings',
+    icon: 'i-heroicons-cog-6-tooth',
+    color: 'text-green-500',
+  },
+]
+
+const logoutLink = [
+  {
+    label: 'Logout',
+    to: '#',
+    icon: 'i-heroicons-arrow-left-on-rectangle',
+    current: false,
   },
 ]
 
@@ -41,7 +50,7 @@ const sidebarOpen = ref(false)
         leave-from="opacity-100"
         leave-to="opacity-0"
       >
-        <div class="fixed inset-0 bg-gray-900/80" />
+        <div class="fixed inset-0 bg-gray-950/80" />
       </TransitionChild>
 
       <div class="fixed inset-0 flex">
@@ -83,7 +92,7 @@ const sidebarOpen = ref(false)
             </TransitionChild>
             <!-- Sidebar component -->
             <div
-              class="flex grow flex-col gap-y-5 overflow-y-auto px-6 ring-1 ring-white/10 dark:bg-gray-900"
+              class="flex grow flex-col gap-y-5 overflow-y-auto px-6 ring-1 ring-white/10 dark:bg-gray-950"
             >
               <div class="flex h-16 shrink-0 items-center">
                 <img class="h-8 w-auto" src="/favicon.ico" alt="Nuxt Logo" />
@@ -92,18 +101,18 @@ const sidebarOpen = ref(false)
                 <ul class="flex flex-1 flex-col gap-y-7" role="list">
                   <li>
                     <ul class="-mx-2 space-y-1" role="list">
-                      <li v-for="item in navigation" :key="item.name">
+                      <li v-for="item in links" :key="item.label">
                         <NuxtLink
                           class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white"
                           active-class="bg-gray-800 text-white"
-                          :href="item.href"
+                          :to="item.to"
                         >
                           <Icon
                             class="h-6 w-6 shrink-0"
                             :name="item.icon"
                             aria-hidden="true"
                           />
-                          {{ item.name }}
+                          {{ item.label }}
                         </NuxtLink>
                       </li>
                     </ul>
@@ -133,46 +142,17 @@ const sidebarOpen = ref(false)
   <!-- Static sidebar for desktop -->
   <div class="hidden xl:fixed xl:inset-y-0 xl:z-50 xl:flex xl:w-72 xl:flex-col">
     <div
-      class="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-300 px-6 ring-1 ring-black/10 dark:bg-gray-900 dark:ring-white/5"
+      class="flex grow flex-col overflow-y-auto bg-gray-300 px-6 ring-1 ring-black/10 dark:bg-gray-950 dark:ring-white/5"
     >
       <ULink class="flex h-16 shrink-0 items-center justify-around" to="/">
         <img class="h-8 w-auto" src="/favicon.ico" alt="Nuxt Logo" />
         <span class="mr-8">Nuxt DocuSearch AI</span>
       </ULink>
-      <nav class="flex flex-1 flex-col">
-        <ul class="flex flex-1 flex-col gap-y-7" role="list">
-          <li>
-            <ul class="-mx-2 space-y-1" role="list">
-              <li v-for="item in navigation" :key="item.name">
-                <NuxtLink
-                  class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 hover:bg-gray-400 hover:text-gray-800 dark:text-gray-400 dark:hover:bg-gray-800"
-                  :to="item.href"
-                  active-class="bg-gray-200 text-gray-900 dark:bg-gray-800 dark:text-white"
-                >
-                  <Icon
-                    class="gray-900 dark:gray-200 h-6 w-6 shrink-0"
-                    :name="item.icon"
-                    aria-hidden="true"
-                  />
-                  {{ item.name }}
-                </NuxtLink>
-              </li>
-            </ul>
-          </li>
-
-          <!--  logged in user  -->
-          <li class="-mx-6 mt-auto">
-            <NuxtLink
-              class="flex items-center gap-x-4 border border-x-0 border-b-0 border-t-white/5 bg-gray-200 px-6 py-3 text-sm font-semibold leading-6 hover:bg-gray-400 dark:bg-gray-900 dark:text-white dark:hover:bg-gray-900/90"
-              href="#"
-            >
-              <Icon class="h-8 w-8 rounded-full" name="heroicons:user-circle" />
-              <span class="sr-only">User</span>
-              <span aria-hidden="true">User</span>
-            </NuxtLink>
-          </li>
-        </ul>
-      </nav>
+      <UDivider class="mb-8" />
+      <div class="flex flex-col justify-between h-full pb-4">
+        <UVerticalNavigation :ui="{ base: 'gap-4' }" :links="links" />
+        <UVerticalNavigation :links="logoutLink" />
+      </div>
     </div>
   </div>
 </template>
