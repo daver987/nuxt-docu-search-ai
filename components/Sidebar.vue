@@ -76,7 +76,7 @@ const sidebarOpen = ref(false)
               <div
                 class="absolute left-full top-0 flex w-16 justify-center pt-5"
               >
-                <button
+                <UButton
                   class="-m-2.5 p-2.5"
                   type="button"
                   @click="sidebarOpen = false"
@@ -87,7 +87,7 @@ const sidebarOpen = ref(false)
                     name="heroicons:x-mark"
                     aria-hidden="true"
                   />
-                </button>
+                </UButton>
               </div>
             </TransitionChild>
             <!-- Sidebar component -->
@@ -95,7 +95,11 @@ const sidebarOpen = ref(false)
               class="flex grow flex-col gap-y-5 overflow-y-auto px-6 ring-1 ring-white/10 dark:bg-gray-950"
             >
               <div class="flex h-16 shrink-0 items-center">
-                <img class="h-8 w-auto" src="/favicon.ico" alt="Nuxt Logo" />
+                <NuxtImg
+                  class="h-8 w-auto"
+                  src="/favicon.ico"
+                  alt="Nuxt Logo"
+                />
               </div>
               <nav class="flex flex-1 flex-col">
                 <ul class="flex flex-1 flex-col gap-y-7" role="list">
@@ -145,7 +149,7 @@ const sidebarOpen = ref(false)
       class="flex grow flex-col overflow-y-auto bg-gray-300 px-6 ring-1 ring-black/10 dark:bg-gray-950 dark:ring-white/5"
     >
       <ULink class="flex h-16 shrink-0 items-center justify-around" to="/">
-        <img class="h-8 w-auto" src="/favicon.ico" alt="Nuxt Logo" />
+        <NuxtImg class="h-8 w-auto" src="/favicon.ico" alt="Nuxt Logo" />
         <span class="mr-8">Nuxt DocuSearch AI</span>
       </ULink>
       <UDivider class="mb-8" />

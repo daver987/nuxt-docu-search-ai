@@ -1,4 +1,4 @@
-import { H3Event, EventHandlerRequest } from 'h3'
+import type { H3Event, EventHandlerRequest } from 'h3'
 import * as net from 'net'
 
 type SocketType = net.Socket

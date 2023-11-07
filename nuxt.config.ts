@@ -6,6 +6,7 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     'nuxt-icon',
     '@formkit/auto-animate/nuxt',
+    '@nuxt/image',
   ],
 
   app: {
@@ -14,13 +15,8 @@ export default defineNuxtConfig({
       mode: 'out-in',
     },
   },
-
-  build: {
-    transpile: ['openai-edge'],
-  },
-
-  ui: {
-    global: true,
+  tailwindcss: {
+    viewer: false,
   },
 
   colorMode: {
