@@ -22,8 +22,8 @@ const chatSchema = z.object({
 export const runtime = 'edge'
 
 interface Config {
-  OPENAI_API_KEY: string
-  OPENAI_FINE_TUNED: string
+  NUXT_OPENAI_API_KEY: string
+  NUXT_OPENAI_FINE_TUNED: string
 }
 
 interface SystemMessage {
@@ -41,8 +41,8 @@ const systemMessage: SystemMessage = {
 
 function getConfig(): Config {
   return {
-    OPENAI_API_KEY: useRuntimeConfig().OPENAI_API_KEY,
-    OPENAI_FINE_TUNED: useRuntimeConfig().OPENAI_FINE_TUNED,
+    NUXT_OPENAI_API_KEY: useRuntimeConfig().OPENAI_API_KEY,
+    NUXT_OPENAI_FINE_TUNED: useRuntimeConfig().OPENAI_FINE_TUNED,
   }
 }
 
@@ -60,7 +60,10 @@ export default defineEventHandler(
     const body = await readValidatedBody(event, chatSchema.parse)
 
     const config = getConfig()
-    const llm = initLangchain(config.OPENAI_API_KEY, config.OPENAI_FINE_TUNED)
+    const llm = initLangchain(
+      config.NUXT_OPENAI_API_KEY,
+      config.NUXT_OPENAI_FINE_TUNED
+    )
 
     const { messages } = body
     messages.push(systemMessage)
