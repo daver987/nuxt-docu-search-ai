@@ -51,7 +51,10 @@ export default defineNuxtConfig({
   },
 
   nitro: {
-    preset: process.env.NITRO_PRESET,
+    awsAmplify: {
+      catchAllStaticFallback: true,
+    },
+    // preset: process.env.NITRO_PRESET,
   },
 
   devtools: {
