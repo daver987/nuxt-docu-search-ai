@@ -52,18 +52,6 @@ devDependencies:
   nuxt-icon:
     specifier: ^0.6.6
     version: 0.6.6(nuxt@3.8.2)(vite@4.5.0)(vue@3.3.8)
-  nuxt-link-checker:
-    specifier: ^2.1.10
-    version: 2.1.10(@nuxt/devtools@1.0.3)(@vue/compiler-core@3.3.8)(nuxt@3.8.2)(postcss@8.4.31)(vite@4.5.0)(vue@3.3.8)(webpack@5.89.0)
-  nuxt-seo-experiments:
-    specifier: ^3.1.9
-    version: 3.1.9(@nuxt/devtools@1.0.3)(@vue/compiler-core@3.3.8)(nuxt@3.8.2)(postcss@8.4.31)(vite@4.5.0)(vue@3.3.8)(webpack@5.89.0)
-  nuxt-simple-robots:
-    specifier: ^3.1.9
-    version: 3.1.9(@nuxt/devtools@1.0.3)(@vue/compiler-core@3.3.8)(nuxt@3.8.2)(postcss@8.4.31)(vite@4.5.0)(vue@3.3.8)(webpack@5.89.0)
-  nuxt-simple-sitemap:
-    specifier: ^4.1.6
-    version: 4.1.6(@nuxt/devtools@1.0.3)(@vue/compiler-core@3.3.8)(nuxt@3.8.2)(postcss@8.4.31)(vite@4.5.0)(vue@3.3.8)(webpack@5.89.0)
   openai:
     specifier: ^4.20.0
     version: 4.20.0
@@ -2147,7 +2135,6 @@ packages:
     dependencies:
       is-glob: 4.0.3
       micromatch: 4.0.5
-      napi-wasm: 1.1.0
     dev: true
     bundledDependencies:
       - napi-wasm
@@ -7128,10 +7115,6 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
-
-  /napi-wasm@1.1.0:
-    resolution: {integrity: sha512-lHwIAJbmLSjF9VDRm9GoVOy9AGp3aIvkjv+Kvz9h16QR3uSVYH78PNQUnT2U4X53mhlnV2M7wrhibQ3GHicDmg==}
-    dev: true
 
   /negotiator@0.6.3:
     resolution: {integrity: sha512-+EUsqGPLsM+j/zdChZjsnX51g4XrHFOIXwfnCVPGlQk/k5giakcKsuxCObBRu6DSm9opw/O6slWbJdghQM4bBg==}
