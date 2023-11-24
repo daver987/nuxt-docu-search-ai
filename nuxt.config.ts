@@ -42,8 +42,8 @@ export default defineNuxtConfig({
   css: ['md-editor-v3/lib/style.css', 'md-editor-v3/lib/preview.css'],
 
   runtimeConfig: {
-    OPENAI_FINE_TUNED: process.env.OPENAI_FINE_TUNED,
-    OPENAI_API_KEY: process.env.OPENAI_API_KEY,
+    NUXT_OPENAI_FINE_TUNED: process.env.NUXT_OPENAI_FINE_TUNED,
+    NUXT_OPENAI_API_KEY: process.env.NUXT_OPENAI_API_KEY,
     LANGCHAIN_TRACING_V2: process.env.LANGCHAIN_TRACING_V2,
     LANGCHAIN_ENDPOINT: process.env.LANGCHAIN_ENDPOINT,
     LANGCHAIN_API_KEY: process.env.LANGCHAIN_API_KEY,
