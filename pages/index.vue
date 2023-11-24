@@ -8,7 +8,7 @@ import { MdPreview } from 'md-editor-v3'
 import { useParsedEscapedString } from '~/composables/useParsedEscapedString'
 
 useSeoMeta({
-  title: 'NuxtDocuSearchAi - AI Powered Nuxt 3 Documentation Search',
+  title: 'AI Powered Nuxt 3 Documentation Search',
   description:
     'Experience the power of AI in searching the Nuxt 3 documentation with NuxtDocuSearchAi. Discover content faster and more efficiently.',
   ogTitle: 'NuxtDocuSearchAi - AI Powered Nuxt 3 Documentation Search',

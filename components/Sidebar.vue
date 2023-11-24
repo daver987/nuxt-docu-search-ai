@@ -16,7 +16,7 @@ const links = [
   },
   {
     label: 'Settings',
-    to: '/settings',
+    to: '/settings/',
     icon: 'i-heroicons-cog-6-tooth',
     color: 'text-green-500',
   },
@@ -25,7 +25,7 @@ const links = [
 const logoutLink = [
   {
     label: 'Logout',
-    to: '#',
+    to: '/',
     icon: 'i-heroicons-arrow-left-on-rectangle',
     current: false,
   },
@@ -97,7 +97,7 @@ const sidebarOpen = ref(false)
               <div class="flex h-16 shrink-0 items-center">
                 <NuxtImg
                   class="h-8 w-auto"
-                  src="/favicon.ico"
+                  src="/images/icon-green.png"
                   alt="Nuxt Logo"
                 />
               </div>
@@ -124,7 +124,7 @@ const sidebarOpen = ref(false)
                   <li class="-mx-6 mt-auto">
                     <NuxtLink
                       class="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-white hover:bg-gray-800"
-                      href="#"
+                      to="/"
                     >
                       <Icon
                         class="h-8 w-8 rounded-full dark:bg-gray-800"
@@ -148,10 +148,14 @@ const sidebarOpen = ref(false)
     <div
       class="flex grow flex-col overflow-y-auto bg-gray-300 px-6 ring-1 ring-black/10 dark:bg-gray-950 dark:ring-white/5"
     >
-      <ULink class="flex h-16 shrink-0 items-center justify-around" to="/">
-        <NuxtImg class="h-8 w-auto" src="/favicon.ico" alt="Nuxt Logo" />
+      <NuxtLink class="flex h-16 shrink-0 items-center justify-around" to="/">
+        <NuxtImg
+          class="h-8 w-auto"
+          src="/images/icon-green.png"
+          alt="Nuxt Logo"
+        />
         <span class="mr-8">Nuxt DocuSearch AI</span>
-      </ULink>
+      </NuxtLink>
       <UDivider class="mb-8" />
       <div class="flex flex-col justify-between h-full pb-4">
         <UVerticalNavigation :ui="{ base: 'gap-4' }" :links="links" />

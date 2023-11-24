@@ -7,8 +7,8 @@ export default defineNuxtConfig({
     'nuxt-icon',
     '@formkit/auto-animate/nuxt',
     '@nuxt/image',
+    '@nuxtseo/module',
   ],
-
   app: {
     pageTransition: {
       name: 'side-fade',
@@ -23,6 +23,20 @@ export default defineNuxtConfig({
     preference: 'dark',
     dataValue: 'theme',
     classSuffix: '',
+  },
+
+  site: {
+    url: 'https://nuxtdocusearchai.com',
+    name: 'NuxtDocuSearchAi',
+    description:
+      'Experience the power of AI in searching the Nuxt 3 documentation with NuxtDocuSearchAi. Discover content faster and more efficiently.',
+    defaultLocale: 'en',
+    identity: {
+      type: 'Person',
+    },
+    twitter: '@davidalexr987',
+    trailingSlash: true,
+    titleSeparator: '|',
   },
 
   css: ['md-editor-v3/lib/style.css', 'md-editor-v3/lib/preview.css'],

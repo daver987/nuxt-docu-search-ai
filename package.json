@@ -28,27 +28,28 @@
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
-    "@nuxt/image": "^1.0.0",
+    "@nuxt/image": "^1.1.0",
     "@nuxt/ui": "npm:@nuxt/ui-edge@latest",
-    "@tailwindcss/forms": "^0.5.6",
-    "@types/node": "20.9.0",
-    "@vueuse/components": "^10.5.0",
-    "@vueuse/nuxt": "^10.5.0",
+    "@nuxtseo/module": "2.0.0-beta.45",
+    "@tailwindcss/forms": "^0.5.7",
+    "@types/node": "20.9.5",
+    "@vueuse/components": "^10.6.1",
+    "@vueuse/nuxt": "^10.6.1",
     "chalk": "^5.3.0",
-    "langchain": "0.0.181",
-    "md-editor-v3": "^4.8.2",
-    "nuxt": "npm:nuxt-nightly@3.8.2-28323114.2832f011",
-    "nuxt-icon": "^0.6.5",
-    "openai": "^4.16.1",
-    "prettier": "^3.0.3",
+    "langchain": "0.0.196",
+    "md-editor-v3": "^4.8.3",
+    "nuxt": "^3.8.2",
+    "nuxt-icon": "^0.6.6",
+    "openai": "^4.20.0",
+    "prettier": "^3.1.0",
     "prettier-plugin-organize-attributes": "^1.0.0",
-    "prettier-plugin-tailwindcss": "^0.5.6",
+    "prettier-plugin-tailwindcss": "^0.5.7",
     "typescript": "latest",
     "zod": "^3.22.4"
   },
   "dependencies": {
     "@formkit/auto-animate": "^0.8.1",
-    "ai": "^2.2.21"
+    "ai": "^2.2.25"
   },
   "license": "MIT"
 }

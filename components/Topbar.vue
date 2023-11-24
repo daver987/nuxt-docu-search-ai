@@ -17,20 +17,15 @@ const isDark = computed({
   >
     <span>Query the Nuxt Documentation...</span>
     <div class="flex flex-1 justify-end gap-x-4 lg:gap-x-6">
-      <ClientOnly>
-        <UButton
-          :icon="
-            isDark ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'
-          "
-          color="green"
-          variant="ghost"
-          aria-label="Theme"
-          @click="isDark = !isDark"
-        />
-        <template #fallback>
-          <div class="h-8 w-8 rounded-full" />
-        </template>
-      </ClientOnly>
+      <UButton
+        size="xl"
+        variant="link"
+        color="white"
+        :padded="false"
+        icon="i-ion-logo-github"
+        to="https://github.com/daver987/nuxt-docu-search-ai"
+        aria-label="Github Link"
+      />
     </div>
   </div>
 </template>
