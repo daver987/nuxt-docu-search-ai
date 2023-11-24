@@ -41,8 +41,8 @@ const systemMessage: SystemMessage = {
 
 function getConfig(): Config {
   return {
-    NUXT_OPENAI_API_KEY: useRuntimeConfig().OPENAI_API_KEY,
-    NUXT_OPENAI_FINE_TUNED: useRuntimeConfig().OPENAI_FINE_TUNED,
+    NUXT_OPENAI_API_KEY: useRuntimeConfig().NUXT_OPENAI_API_KEY,
+    NUXT_OPENAI_FINE_TUNED: useRuntimeConfig().NUXT_OPENAI_FINE_TUNED,
   }
 }
 

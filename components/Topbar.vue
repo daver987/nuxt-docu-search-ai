@@ -23,6 +23,7 @@ const isDark = computed({
         color="white"
         :padded="false"
         icon="i-ion-logo-github"
+        target="_blank"
         to="https://github.com/daver987/nuxt-docu-search-ai"
         aria-label="Github Link"
       />
