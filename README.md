@@ -1,9 +1,6 @@
 # Nuxt 3 DocuSearch AI
 
-Nuxt 3 DocuSearch AI is a cutting-edge interface aiming to transform how developers interact with and understand Nuxt 3. Harnessing GPT-4's computational capabilities and integrating with Nuxt 3's exhaustive documentation, this application furnishes users with context-driven answers, amplifying their coding acumen and user experience.
-
-Crafted with Nuxt 3 and LangChain, the application's visual and functional charm is further polished by NuxtLabs UI. For ensuring edge compatibility, the Vercel-AI package is utilized. The application is also intricately woven with the Pinecone Vector database, a robust platform adept at managing high-dimensional vector data.
-
+Nuxt 3 DocuSearch AI offers a streamlined interface for developers to interact with Nuxt 3 documentation more efficiently. By leveraging a fine-tuned GPT-3.5 model and integrating directly with Nuxt 3, the application provides concise, context-aware answers to user queries, enhancing developer experience and productivity. This tool combines Nuxt 3's modern web development framework with the latest advancements in AI to offer a responsive and intuitive query-response interface, simplified by the use of websockets for real-time communication. Designed with simplicity and efficiency in mind, it is an essential tool for developers looking to navigate Nuxt 3 documentation effectively.
 ## Table of Contents
 
 1. [Project Structure](#project-structure)
@@ -15,8 +12,7 @@ Crafted with Nuxt 3 and LangChain, the application's visual and functional charm
 
 ## Project Structure
 
-The platform's architecture is built around a chat-styled interface. The main page incorporates a top navigation bar, and an input field located at the bottom enables users to type in their Nuxt 3 queries. This structure, unlike traditional modal-based designs, mimics a chat environment for an intuitive user experience. As users input their questions, GPT-4 processes them, channeling back comprehensive answers. Additionally, a side navigation menu on the left caters to settings and other functionalities. To augment the display of returned code snippets, the application is integrated with md-editor-v3, offering syntax highlighting along with copy-paste capabilities.
-
+The Nuxt 3 DocuSearch AI features a streamlined chat-like interface that facilitates an engaging way for developers to interact with Nuxt 3 documentation. At its core, the interface boasts a responsive top navigation bar and a dedicated input area at the bottom, encouraging users to submit their queries in a conversational manner. This design choice departs from traditional documentation interfaces, offering a more dynamic and interactive user experience. Responses, powered by a fine-tuned GPT-3.5 model, are delivered in real-time, thanks to the integration of websockets, ensuring prompt and relevant information retrieval. A side navigation menu provides quick access to additional features and settings, enhancing the application's usability. The application leverages LangChain for streamlined AI interactions, ShikiJS for syntax highlighting within returned code snippets, and Markdown-it for parsing and displaying markdown content, ensuring a rich and informative display of information.
 ## Setup and Installation
 
 To set up this project locally, please follow these steps:
@@ -24,7 +20,7 @@ To set up this project locally, please follow these steps:
 1. Clone this repository to your local machine.
 2. Navigate into the project directory.
 3. Install the necessary packages with `pnpm install`.
-4. Create an `.env` file in the root directory and provide your OpenAI API key and your Pinecone Database Details
+4. Create an `.env` file in the root directory and provide your OpenAI API key
 5. Start the development server on `http://localhost:3000` with `pnpm run dev`.
 
 Please ensure you have Node.js, npm, and Redis installed on your system before attempting to run this project.
@@ -34,9 +30,9 @@ Please ensure you have Node.js, npm, and Redis installed on your system before a
 To use the application:
 
 1. Navigate to `http://localhost:3000` in your web browser.
-2. Click on the search bar in the navigation.
-3. A modal will open, input your question or query related to Nuxt 3 in the provided field.
-4. The application will process the query using GPT-4, and you will see the answer streaming back.
+2. Input your request in the provided textarea field at the bottom of the page.
+3. Press the "Send" button or hit "Enter" to submit your query.
+4. The application will respond with relevant information in real-time, providing concise and context-aware answers to your queries.
 
 ## Building for Production
 

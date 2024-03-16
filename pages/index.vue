@@ -67,30 +67,40 @@ const idNumber = ref(0)
 const { data, send } = useWebSocket('ws://localhost:3000/api/ws/chat')
 
 watch(data, (newValue) => {
+  console.log('New data received:', newValue) // Added logging for new data reception
   if (newValue) {
     const lastMessage = history.value[history.value.length - 1]
+    console.log('Last message in history:', lastMessage) // Added logging for last message
     if (lastMessage && lastMessage.role === 'assistant') {
       lastMessage.content += useParsedEscapedString(newValue)
       history.value.splice(history.value.length - 1, 1, lastMessage)
+      console.log(
+        'Updated last assistant message with new content:',
+        lastMessage
+      ) // Added logging for updated message
     } else {
       history.value.push({
         content: newValue,
         role: 'assistant',
         id: idNumber.value++,
       })
+      console.log('Added new assistant message to history:', newValue) // Added logging for new message addition
     }
   }
 })
 
 async function onSubmit(event: FormSubmitEvent<ChatMessage>) {
-  console.log(event.data)
+  console.log('Form submitted with data:', event.data) // Added logging for form submission
   history.value.push({
     content: event.data.content,
     role: 'user',
     id: idNumber.value++,
   })
+  console.log('Added new user message to history:', event.data.content) // Added logging for new message addition
   send(JSON.stringify(event.data))
+  console.log('Sent data to WebSocket:', JSON.stringify(event.data)) // Added logging for WebSocket data send
   state.value.content = ''
+  console.log('Cleared state content after submission') // Added logging for state content clearance
 }
 
 const handleTextareaKeydown = (event: KeyboardEvent) => {
