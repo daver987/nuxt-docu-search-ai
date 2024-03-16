@@ -1,5 +1,4 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-
 export default defineNuxtConfig({
   modules: [
     '@nuxt/ui',
@@ -7,7 +6,8 @@ export default defineNuxtConfig({
     'nuxt-icon',
     '@formkit/auto-animate/nuxt',
     '@nuxt/image',
-    '@nuxtseo/module',
+    '@nuxtjs/seo',
+    'nuxt-shiki',
   ],
   app: {
     pageTransition: {
@@ -54,9 +54,14 @@ export default defineNuxtConfig({
     awsAmplify: {
       catchAllStaticFallback: true,
     },
+    experimental: {
+      websocket: true,
+    },
     // preset: process.env.NITRO_PRESET,
   },
-
+  future: {
+    typescriptBundlerResolution: true,
+  },
   devtools: {
     enabled: true,
 

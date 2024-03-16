@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { ref, watch } from '#imports'
-import { useChat } from 'ai/vue'
-import type { Message } from 'ai'
-import type { Ref } from 'vue'
 import { vAutoAnimate } from '@formkit/auto-animate'
-import { MdPreview } from 'md-editor-v3'
-import { useParsedEscapedString } from '~/composables/useParsedEscapedString'
+import type { FormSubmitEvent } from '#ui/types'
+import { z } from 'zod'
+import type { Ref } from 'vue'
+import { useWebSocket } from '#imports'
+import MarkdownIt from 'markdown-it'
+import Shiki from '@shikijs/markdown-it'
 
 useSeoMeta({
   title: 'AI Powered Nuxt 3 Documentation Search',
@@ -15,8 +15,8 @@ useSeoMeta({
   ogDescription:
     'Unleash the potential of AI driven search for Nuxt 3 documentation. Dive into topics with unprecedented ease.',
   ogImage: '/images/nuxt-og-image.png',
-  ogUrl: 'https://nuxtDocusearchAi.com',
-  twitterTitle: 'Discover Nuxt 3 Docs with AI - NuxtDocuSearchAi',
+  ogUrl: 'https://nuxtDocusearchAI.com',
+  twitterTitle: 'Discover Nuxt 3 Docs with AI - NuxtDocuSearchAI',
   twitterDescription:
     'Transform your documentation search experience with AI-powered NuxtDocuSearchAi. Find what you need in seconds.',
   twitterImage: '/images/nuxt-og-image.png',
@@ -41,74 +41,106 @@ definePageMeta({
   colorMode: 'dark',
 })
 
-const { messages, input, handleSubmit, isLoading } = useChat({
-  headers: { 'Content-Type': 'application/json' },
-})
-const parsedMessages: Ref<Message[]> = ref([])
+const md = MarkdownIt()
 
-watch(messages, (newMessages) => {
-  parsedMessages.value = newMessages.map((message) => {
-    if (message.role === 'assistant') {
-      return {
-        ...message,
-        content: useParsedEscapedString(message.content),
-      }
-    }
-    return message
+md.use(
+  await Shiki({
+    themes: {
+      light: 'one-dark-pro',
+      dark: 'one-dark-pro',
+    },
   })
+)
+
+const schema = z.object({
+  content: z.string().min(1).max(5000),
 })
 
-watch(isLoading, async (newValue) => {
-  if (!newValue) {
-    console.log('Done Loading', messages)
+type ChatMessage = z.infer<typeof schema>
+
+const state: Ref<ChatMessage> = ref({
+  content: '',
+})
+
+const history = ref<Array<{ content: string; role: string; id: number }>>([])
+const idNumber = ref(0)
+const { data, send } = useWebSocket('ws://localhost:3000/api/ws/chat')
+
+watch(data, (newValue) => {
+  if (newValue) {
+    const lastMessage = history.value[history.value.length - 1]
+    if (lastMessage && lastMessage.role === 'assistant') {
+      lastMessage.content += useParsedEscapedString(newValue)
+      history.value.splice(history.value.length - 1, 1, lastMessage)
+    } else {
+      history.value.push({
+        content: newValue,
+        role: 'assistant',
+        id: idNumber.value++,
+      })
+    }
   }
 })
 
-const handleTextareaKeydown = (
-  event: KeyboardEvent,
-  submitFunction: Function
-) => {
-  if (event.shiftKey) {
+async function onSubmit(event: FormSubmitEvent<ChatMessage>) {
+  console.log(event.data)
+  history.value.push({
+    content: event.data.content,
+    role: 'user',
+    id: idNumber.value++,
+  })
+  send(JSON.stringify(event.data))
+  state.value.content = ''
+}
+
+const handleTextareaKeydown = (event: KeyboardEvent) => {
+  if (event.key === 'Enter' && !event.shiftKey) {
     event.preventDefault()
-    input.value += '\n'
-  } else {
-    submitFunction(event)
+    onSubmit({ data: state.value } as FormSubmitEvent<ChatMessage>)
+  } else if (event.shiftKey && event.key === 'Enter') {
+    event.stopPropagation()
+    state.value.content += '\n'
   }
 }
 </script>
 
 <template>
   <div>
-    <main class="min-h-[75dvh]" v-auto-animate>
-      <template v-for="message in parsedMessages" :key="message.id">
-        <div
-          class="border-b border-black/10 p-8 dark:bg-gray-700"
-          v-if="message.role === 'user'"
-        >
-          <div class="mx-auto max-w-4xl">
-            <Icon class="mr-1.5" size="24px" name="solar:user-linear" />
-            <span> {{ message.content }}</span>
+    <main
+      class="min-h-[75dvh] prose prose-sm dark:prose-invert max-w-none"
+      v-auto-animate
+    >
+      <div class="mx-auto max-w-4xl">
+        <div class="px-8">
+          <div>
+            <template v-for="message in history" :key="message.id">
+              <div
+                class="border-b border-black/10 p-8 dark:bg-gray-700"
+                v-if="message.role === 'user'"
+              >
+                <div class="mx-auto max-w-4xl">
+                  <Icon class="mr-1.5" size="24px" name="solar:user-linear" />
+                  <span> {{ message.content }}</span>
+                </div>
+              </div>
+              <div
+                class="border-b border-black/10 bg-gray-200 p-8 dark:bg-gray-800"
+                v-else
+              >
+                <div class="mx-auto max-w-4xl">
+                  <span class="pb-12 text" style="font-size: 1.5rem"
+                    >Nuxt-AI</span
+                  >
+                  <div
+                    class="prose prose-sm dark:prose-invert max-w-none"
+                    v-html="md.render(message.content)"
+                  ></div>
+                </div>
+              </div>
+            </template>
           </div>
         </div>
-        <div
-          class="border-b border-black/10 bg-gray-200 p-8 dark:bg-gray-800"
-          v-else
-        >
-          <div class="mx-auto max-w-4xl">
-            <span class="pb-12 text-lg font-medium">Nuxt-AI</span>
-            <span
-              ><MdPreview
-                language="en-US"
-                theme="dark"
-                :editorId="message.id"
-                :modelValue="message.content"
-                scrollAuto
-                readonly
-                autoDetectCode
-            /></span>
-          </div>
-        </div>
-      </template>
+      </div>
     </main>
 
     <div
@@ -117,23 +149,20 @@ const handleTextareaKeydown = (
       <div
         class="mx-auto w-full max-w-4xl bg-gray-200 pb-3 pt-6 dark:bg-gray-950"
       >
-        <form @submit.prevent="handleSubmit">
+        <UForm :schema="schema" :state="state" @submit="onSubmit">
           <UFormGroup
-            name="chatQuestion"
+            name="content"
             help="Tip: For best results, make sure to include the main keyword related to your query."
           >
             <div class="relative">
               <UTextarea
-                v-model="input"
+                v-model="state.content"
                 placeholder="Type your Nuxt query here... e.g., 'Can you show me an advanced example of how to use useState?'"
-                autoresize
+                :autoresize="true"
                 :rows="3"
                 size="sm"
-                @keydown.enter="
-                  (event: KeyboardEvent) =>
-                    handleTextareaKeydown(event, handleSubmit)
-                "
-                @keydown.shift.enter="(event: any) => event.stopPropagation()"
+                @keydown.enter="handleTextareaKeydown"
+                @keydown.shift.enter="handleTextareaKeydown"
               />
               <UButton
                 class="absolute bottom-2 right-2"
@@ -141,13 +170,12 @@ const handleTextareaKeydown = (
                 type="submit"
                 size="sm"
                 color="primary"
-                square
+                :square="true"
                 variant="solid"
-                @click="handleSubmit"
               />
             </div>
           </UFormGroup>
-        </form>
+        </UForm>
       </div>
     </div>
   </div>

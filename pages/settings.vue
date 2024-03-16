@@ -38,7 +38,7 @@ const handleSubmit = () => {
         </template>
 
         <UFormGroup name="apikey" label="Open AI Api Key">
-          <UInput type="text" disabled placeholder="Enter API key..." />
+          <UInput type="text" :disabled="true" placeholder="Enter API key..." />
         </UFormGroup>
         <template #footer>
           <UButton

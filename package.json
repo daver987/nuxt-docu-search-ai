@@ -27,29 +27,39 @@
     "singleQuote": true
   },
   "devDependencies": {
+    "@langchain/core": "0.1.48",
+    "@langchain/openai": "^0.0.21",
     "@nuxt/devtools": "latest",
-    "@nuxt/image": "^1.1.0",
+    "@nuxt/image": "^1.4.0",
     "@nuxt/ui": "npm:@nuxt/ui-edge@latest",
-    "@nuxtseo/module": "2.0.0-beta.45",
+    "@nuxtjs/seo": "latest",
+    "@shikijs/markdown-it": "^1.2.0",
     "@tailwindcss/forms": "^0.5.7",
-    "@types/node": "20.9.5",
-    "@vueuse/components": "^10.6.1",
-    "@vueuse/nuxt": "^10.6.1",
+    "@types/node": "20.11.28",
+    "@vueuse/components": "^10.9.0",
+    "@vueuse/nuxt": "^10.9.0",
     "chalk": "^5.3.0",
-    "langchain": "0.0.196",
-    "md-editor-v3": "^4.8.3",
-    "nuxt": "^3.8.2",
-    "nuxt-icon": "^0.6.6",
-    "openai": "^4.20.0",
-    "prettier": "^3.1.0",
+    "langchain": "0.1.28",
+    "md-editor-v3": "^4.12.1",
+    "nuxt": "npm:nuxt-nightly@3.11.0-28508947.4be430e1",
+    "nuxt-icon": "^0.6.9",
+    "nuxt-shiki": "^0.2.1",
+    "openai": "^4.29.1",
+    "prettier": "^3.2.5",
     "prettier-plugin-organize-attributes": "^1.0.0",
-    "prettier-plugin-tailwindcss": "^0.5.7",
+    "prettier-plugin-tailwindcss": "^0.5.12",
     "typescript": "latest",
     "zod": "^3.22.4"
   },
   "dependencies": {
     "@formkit/auto-animate": "^0.8.1",
-    "ai": "^2.2.25"
+    "ai": "^3.0.12"
   },
-  "license": "MIT"
+  "pnpm": {
+    "overrides": {
+      "@langchain/core": "0.1.48"
+    }
+  },
+  "license": "MIT",
+  "packageManager": "pnpm@8.15.4+sha256.cea6d0bdf2de3a0549582da3983c70c92ffc577ff4410cbf190817ddc35137c2"
 }
