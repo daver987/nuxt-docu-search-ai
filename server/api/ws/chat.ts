@@ -50,9 +50,10 @@ async function sendWebSocketMessage(
   peer: Peer,
   message: Message
 ): Promise<void> {
+  const config = useRuntimeConfig()
   const llm = initLangchain(
-    process.env.NUXT_OPENAI_API_KEY as string,
-    process.env.NUXT_OPENAI_FINE_TUNED as string
+    config.NUXT_OPENAI_API_KEY as string,
+    config.NUXT_OPENAI_FINE_TUNED as string
   )
   const parser = initOutputParser()
   const chain = prompt.pipe(llm).pipe(parser)

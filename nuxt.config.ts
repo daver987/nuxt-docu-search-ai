@@ -39,8 +39,6 @@ export default defineNuxtConfig({
     titleSeparator: '|',
   },
 
-  css: ['md-editor-v3/lib/style.css', 'md-editor-v3/lib/preview.css'],
-
   runtimeConfig: {
     NUXT_OPENAI_FINE_TUNED: process.env.NUXT_OPENAI_FINE_TUNED,
     NUXT_OPENAI_API_KEY: process.env.NUXT_OPENAI_API_KEY,
@@ -57,7 +55,6 @@ export default defineNuxtConfig({
     experimental: {
       websocket: true,
     },
-    // preset: process.env.NITRO_PRESET,
   },
   future: {
     typescriptBundlerResolution: true,
