@@ -3,7 +3,7 @@ import { vAutoAnimate } from '@formkit/auto-animate'
 import type { FormSubmitEvent } from '#ui/types'
 import { z } from 'zod'
 import type { Ref } from '#imports'
-import { useWebSocket } from '#imports'
+import { useWebSocket } from '@vueuse/core'
 import MarkdownIt from 'markdown-it'
 import Shiki from '@shikijs/markdown-it'
 

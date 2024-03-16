@@ -35,6 +35,7 @@
     "@nuxtjs/seo": "latest",
     "@shikijs/markdown-it": "^1.2.0",
     "@tailwindcss/forms": "^0.5.7",
+    "@types/markdown-it": "^13.0.7",
     "@types/node": "20.11.28",
     "@vueuse/components": "^10.9.0",
     "@vueuse/nuxt": "^10.9.0",
@@ -52,6 +53,7 @@
   },
   "dependencies": {
     "@formkit/auto-animate": "^0.8.1",
+    "@vueuse/core": "^10.9.0",
     "markdown-it": "^14.0.0"
   },
   "pnpm": {

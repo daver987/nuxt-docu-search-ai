@@ -4,6 +4,7 @@ FROM node:20 as builder
 # Set the working directory in the container
 WORKDIR /app
 
+USER root
 # Enable Corepack to manage package managers
 RUN corepack enable
 
