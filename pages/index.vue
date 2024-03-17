@@ -65,7 +65,7 @@ const state: Ref<ChatMessage> = ref({
 const history = ref<Array<{ content: string; role: string; id: number }>>([])
 const url = useRequestURL()
 const idNumber = ref(0)
-const { data, send } = useWebSocket(`ws://${url.host}/api/ws/chat`)
+const { data, send } = useWebSocket(`wss://${url.host}/api/ws/chat`)
 
 watch(data, (newValue) => {
   console.log('New data received:', newValue) // Added logging for new data reception
